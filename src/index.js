@@ -1,13 +1,34 @@
 import './style.css';
+import Task from './task';
 
-function component() {
-  const element = document.createElement('div');
-  element.classList.add('test');
+const tasks = [];
 
-  // Lodash, currently included via a script, is required for this line to work
-  element.innerHTML = 'Hello Webpack!';
+const addTaskForm = (() => {
+  const form = document.createElement('form');
 
-  return element;
-}
+  const titleInput = document.createElement('input');
+  titleInput.setAttribute('placeholder', 'Add a task');
+  form.appendChild(titleInput);
 
-document.body.appendChild(component());
+  const cancelButton = document.createElement('button');
+  cancelButton.innerText = 'Cancel';
+  cancelButton.setAttribute('type', 'button');
+  form.appendChild(cancelButton);
+
+  const submitButton = document.createElement('button');
+  submitButton.innerText = 'Add Task';
+  submitButton.setAttribute('type', 'button');
+  form.appendChild(submitButton);
+
+  function createNewTask() {
+    if (titleInput.value === '') return;
+    const task = Task(titleInput.value);
+    tasks.push(task);
+    console.log(tasks);
+  }
+  submitButton.addEventListener('click', createNewTask);
+
+  return form;
+})();
+
+document.body.appendChild(addTaskForm);

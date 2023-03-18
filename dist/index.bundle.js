@@ -116,7 +116,17 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElem
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n\n\nfunction component() {\n  const element = document.createElement('div');\n  element.classList.add('test');\n\n  // Lodash, currently included via a script, is required for this line to work\n  element.innerHTML = 'Hello Webpack!';\n\n  return element;\n}\n\ndocument.body.appendChild(component());\n\n\n//# sourceURL=webpack://todo-list/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n/* harmony import */ var _task__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./task */ \"./src/task.js\");\n\n\n\nconst tasks = [];\n\nconst addTaskForm = (() => {\n  const form = document.createElement('form');\n\n  const titleInput = document.createElement('input');\n  titleInput.setAttribute('placeholder', 'Add a task');\n  form.appendChild(titleInput);\n\n  const cancelButton = document.createElement('button');\n  cancelButton.innerText = 'Cancel';\n  cancelButton.setAttribute('type', 'button');\n  form.appendChild(cancelButton);\n\n  const submitButton = document.createElement('button');\n  submitButton.innerText = 'Add Task';\n  submitButton.setAttribute('type', 'button');\n  form.appendChild(submitButton);\n\n  function createNewTask() {\n    if (titleInput.value === '') return;\n    const task = (0,_task__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(titleInput.value);\n    tasks.push(task);\n    console.log(tasks);\n  }\n  submitButton.addEventListener('click', createNewTask);\n\n  return form;\n})();\n\ndocument.body.appendChild(addTaskForm);\n\n\n//# sourceURL=webpack://todo-list/./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/task.js":
+/*!*********************!*\
+  !*** ./src/task.js ***!
+  \*********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nconst Task = (title) => {\n  let _title = title;\n  let _description = '';\n  let _dueDate = '';\n  let _priority = '';\n\n  const getTitle = () => _title;\n  const getDescription = () => _description;\n  const getDueDate = () => _dueDate;\n  const getPriority = () => _priority;\n\n  const setTitle = (newTitle) => {\n    _title = newTitle;\n  };\n  const setDescription = (newDescription) => {\n    _description = newDescription;\n  };\n  const setDueDate = (newDueDate) => {\n    _dueDate = newDueDate;\n  };\n  const setPriority = (newPriority) => {\n    _priority = newPriority;\n  };\n\n  return {\n    getTitle,\n    getDescription,\n    getDueDate,\n    getPriority,\n    setTitle,\n    setDescription,\n    setDueDate,\n    setPriority,\n  };\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Task);\n\n\n//# sourceURL=webpack://todo-list/./src/task.js?");
 
 /***/ })
 

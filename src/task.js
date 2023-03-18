@@ -33,3 +33,5 @@ const Task = (title) => {
     setPriority,
   };
 };
+
+export default Task;
