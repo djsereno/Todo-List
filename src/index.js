@@ -15,24 +15,40 @@ addTaskButton.addEventListener('click', () => {
   console.log(defaultProject.getTaskTitles());
 });
 
-const projectsDOM = document.querySelector('.projects-list');
-function refreshProjects() {
-  projectsDOM.innerHTML = '';
-  projects.forEach((project) => {
+const projectsDOM = (() => {
+  const node = document.querySelector('.projects-list');
+  const input = document.querySelector('#project-input');
+  const addButton = document.querySelector('#add-project-btn');
+
+  const setCurrentProject = (projectNode) => {
+    const currentProject = node.querySelector('.current');
+    if (currentProject) currentProject.classList.remove('current');
+    projectNode.classList.add('current');
+  };
+
+  const addProjectNode = (projectTitle) => {
     const listItem = document.createElement('li');
-    listItem.innerText = project.getTitle();
-    projectsDOM.appendChild(listItem);
-  });
-}
-refreshProjects();
+    listItem.innerText = projectTitle;
+    node.appendChild(listItem);
+    listItem.addEventListener('click', (event) => setCurrentProject(event.currentTarget));
+  };
 
-const projectInput = document.querySelector('#project-input');
-const addProjectButton = document.querySelector('#add-project-btn');
-addProjectButton.addEventListener('click', () => {
-  if (projectInput.value === '') return;
-  const newProject = Project(projectInput.value);
-  projects.push(newProject);
-  projectInput.value = '';
-  refreshProjects();
-});
+  const handleClick = () => {
+    if (input.value === '') return;
+    addProjectNode(input.value);
+    const newProject = Project(input.value);
+    projects.push(newProject);
+    input.value = '';
+  };
 
+  const refresh = () => {
+    node.innerHTML = '';
+    projects.forEach((project) => addProjectNode(project.getTitle()));
+    setCurrentProject(node.firstChild);
+  };
+
+  addButton.addEventListener('click', () => handleClick());
+  refresh();
+
+  return { node, refresh };
+})();
