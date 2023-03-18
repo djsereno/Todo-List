@@ -1,3 +1,9 @@
-.test {
+.projects-list li {
+  cursor: pointer;
+}
+
+.projects-list .current {
   color: blue;
+  text-decoration: underline;
+  font-weight: bold;
 }

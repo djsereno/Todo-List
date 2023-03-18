@@ -29,6 +29,7 @@ const projectsDOM = (() => {
   const addProjectNode = (projectTitle) => {
     const listItem = document.createElement('li');
     listItem.innerText = projectTitle;
+    listItem.classList.add('project-title');
     node.appendChild(listItem);
     listItem.addEventListener('click', (event) => setCurrentProject(event.currentTarget));
   };
