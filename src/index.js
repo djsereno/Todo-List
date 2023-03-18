@@ -1,34 +1,38 @@
 import './style.css';
+import Project from './project';
 import Task from './task';
 
-const tasks = [];
+const defaultProject = Project('My Project');
+const projects = [defaultProject];
 
-const addTaskForm = (() => {
-  const form = document.createElement('form');
+const taskInput = document.querySelector('#task-input');
+const addTaskButton = document.querySelector('#add-task-btn');
+addTaskButton.addEventListener('click', () => {
+  if (taskInput.value === '') return;
+  const newTask = Task(taskInput.value);
+  defaultProject.addTask(newTask);
+  taskInput.value = '';
+  console.log(defaultProject.getTaskTitles());
+});
 
-  const titleInput = document.createElement('input');
-  titleInput.setAttribute('placeholder', 'Add a task');
-  form.appendChild(titleInput);
+const projectsDOM = document.querySelector('.projects-list');
+function refreshProjects() {
+  projectsDOM.innerHTML = '';
+  projects.forEach((project) => {
+    const listItem = document.createElement('li');
+    listItem.innerText = project.getTitle();
+    projectsDOM.appendChild(listItem);
+  });
+}
+refreshProjects();
 
-  const cancelButton = document.createElement('button');
-  cancelButton.innerText = 'Cancel';
-  cancelButton.setAttribute('type', 'button');
-  form.appendChild(cancelButton);
+const projectInput = document.querySelector('#project-input');
+const addProjectButton = document.querySelector('#add-project-btn');
+addProjectButton.addEventListener('click', () => {
+  if (projectInput.value === '') return;
+  const newProject = Project(projectInput.value);
+  projects.push(newProject);
+  projectInput.value = '';
+  refreshProjects();
+});
 
-  const submitButton = document.createElement('button');
-  submitButton.innerText = 'Add Task';
-  submitButton.setAttribute('type', 'button');
-  form.appendChild(submitButton);
-
-  function createNewTask() {
-    if (titleInput.value === '') return;
-    const task = Task(titleInput.value);
-    tasks.push(task);
-    console.log(tasks);
-  }
-  submitButton.addEventListener('click', createNewTask);
-
-  return form;
-})();
-
-document.body.appendChild(addTaskForm);

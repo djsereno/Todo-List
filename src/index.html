@@ -10,7 +10,22 @@
   <body>
     <header></header>
     <main>
+      <form action="" class="add-task-form">
+        <input type="text" id="title-input" placeholder="Add a task" />
+        <button type="button" class="cancel-btn">Cancel</button>
+        <button type="button" id="add-task-btn">Add Task</button>
+      </form>
+      <form action="" class="add-project-form">
+        <input type="text" id="project-input" placeholder="Add a project" />
+        <button type="button" class="cancel-btn">Cancel</button>
+        <button type="button" id="add-project-btn">Add Project</button>
+      </form>
       <button type="button" class="add-task">+</button>
+
+      <h1>Projects</h1>
+      <div class="projects-container">
+        <ul class="projects-list"></ul>
+      </div>
     </main>
     <footer></footer>
   </body>
