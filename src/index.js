@@ -6,9 +6,9 @@ import Task from './task';
 const project1 = Project('Project');
 project1.addTask(Task('Task a'));
 project1.addTask(Task('Task b'));
-project1.addTask(Task('Task c'));
+project1.addTask(Task('Task c', 'simple task', '', '01-02-03'));
 const project2 = Project('Project');
-project2.addTask(Task('Task d'));
+project2.addTask(Task('Task d', 'urgent task', 'very-high', '11-22-33'));
 const project3 = Project('Project');
 project3.addTask(Task('Task e'));
 project3.addTask(Task('Task f'));
@@ -41,32 +41,46 @@ const tasksDOM = (() => {
     taskNode.classList.add('active');
   };
 
-  const addTaskNode = (taskTitle) => {
+  const addTaskNode = (task) => {
     const listItem = document.createElement('li');
-    listItem.innerText = taskTitle;
+    listItem.innerText = task.getTitle();
     listItem.classList.add('task-title');
+
+    const detailsList = document.createElement('ul');
+    detailsList.classList.add('task-details');
+    listItem.appendChild(detailsList);
+
+    const taskDetails = task.getDetails();
+    Object.keys(taskDetails).forEach((key) => {
+      if (key === 'title' || taskDetails[key] === null) return;
+      const detailItem = document.createElement('li');
+      detailItem.innerText = `${key}: ${taskDetails[key]}`;
+      detailItem.classList.add('task-detail', key);
+      detailsList.appendChild(detailItem);
+    });
+
     node.appendChild(listItem);
     listItem.addEventListener('click', (event) => setActiveTask(event.currentTarget));
   };
 
   const handleClick = () => {
     if (titleInput.value === '') return;
-    addTaskNode(titleInput.value);
-    const newTask = Task(
+    const task = Task(
       titleInput.value,
       descriptionInput.value,
       priorityInput.value,
       dueDateInput.value,
     );
-    activeProject.addTask(newTask);
-    newTask.showDetails();
+    addTaskNode(task);
+    activeProject.addTask(task);
+    console.table(task.getDetails());
     clearForm();
   };
 
   const refresh = () => {
     node.innerHTML = '';
     const tasks = activeProject.getTasks();
-    tasks.forEach((task) => addTaskNode(task.getTitle()));
+    tasks.forEach((task) => addTaskNode(task));
   };
 
   addButton.addEventListener('click', () => handleClick());

@@ -4,14 +4,12 @@ const Task = (title, description, priority, dueDate) => {
   let _priority = priority || 'normal';
   let _dueDate = dueDate || null;
 
-  const showDetails = () =>
-    console.table({
-      title: _title,
-      description: _description,
-      priority: _priority,
-      dueDate: _dueDate,
-    });
-
+  const getDetails = () => ({
+    title: _title,
+    description: _description,
+    priority: _priority,
+    dueDate: _dueDate,
+  });
   const getTitle = () => _title;
   const getDescription = () => _description;
   const getDueDate = () => _dueDate;
@@ -31,6 +29,7 @@ const Task = (title, description, priority, dueDate) => {
   };
 
   return {
+    getDetails,
     getTitle,
     getDescription,
     getDueDate,
@@ -39,7 +38,6 @@ const Task = (title, description, priority, dueDate) => {
     setDescription,
     setDueDate,
     setPriority,
-    showDetails,
   };
 };
 

@@ -1,5 +1,5 @@
 .projects-list li,
-.task-list li {
+.task-title {
   cursor: pointer;
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
@@ -7,8 +7,12 @@
 }
 
 .projects-list .active,
-.task-list .active {
+.task-title.active {
   color: blue;
   text-decoration: underline;
   font-weight: bold;
+}
+
+.task-title:not(.active) .task-details {
+  display: none;
 }
