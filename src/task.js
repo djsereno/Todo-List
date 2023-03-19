@@ -1,8 +1,16 @@
-const Task = (title) => {
+const Task = (title, description, priority, dueDate) => {
   let _title = title;
-  let _description = '';
-  let _dueDate = '';
-  let _priority = '';
+  let _description = description || null;
+  let _priority = priority || 'normal';
+  let _dueDate = dueDate || null;
+
+  const showDetails = () =>
+    console.table({
+      title: _title,
+      description: _description,
+      priority: _priority,
+      dueDate: _dueDate,
+    });
 
   const getTitle = () => _title;
   const getDescription = () => _description;
@@ -31,6 +39,7 @@ const Task = (title) => {
     setDescription,
     setDueDate,
     setPriority,
+    showDetails,
   };
 };
 

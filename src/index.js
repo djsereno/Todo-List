@@ -8,8 +8,18 @@ let currentProject = defaultProject;
 
 const tasksDOM = (() => {
   const node = document.querySelector('.task-list');
-  const input = document.querySelector('#task-input');
+  const titleInput = document.querySelector('#task-title');
+  const descriptionInput = document.querySelector('#task-description');
+  const priorityInput = document.querySelector('#task-priority');
+  const dueDateInput = document.querySelector('#task-due-date');
   const addButton = document.querySelector('#add-task-btn');
+
+  const clearForm = () => {
+    titleInput.value = '';
+    descriptionInput.value = '';
+    priorityInput.value = '';
+    dueDateInput.value = '';
+  };
 
   const addTaskNode = (taskTitle) => {
     const listItem = document.createElement('li');
@@ -19,11 +29,17 @@ const tasksDOM = (() => {
   };
 
   const handleClick = () => {
-    if (input.value === '') return;
-    addTaskNode(input.value);
-    const newTask = Task(input.value);
+    if (titleInput.value === '') return;
+    addTaskNode(titleInput.value);
+    const newTask = Task(
+      titleInput.value,
+      descriptionInput.value,
+      priorityInput.value,
+      dueDateInput.value,
+    );
     currentProject.addTask(newTask);
-    input.value = '';
+    newTask.showDetails();
+    clearForm();
   };
 
   const refresh = () => {
