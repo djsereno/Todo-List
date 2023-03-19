@@ -1,8 +1,10 @@
-.projects-list li {
+.projects-list li,
+.task-list li {
   cursor: pointer;
 }
 
-.projects-list .current {
+.projects-list .current,
+.task-list .current {
   color: blue;
   text-decoration: underline;
   font-weight: bold;

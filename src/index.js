@@ -3,13 +3,13 @@ import Project from './project';
 import Task from './task';
 
 // Dummy projects and tasks for debugging
-const project1 = Project('Project 1');
+const project1 = Project('Project');
 project1.addTask(Task('Task a'));
 project1.addTask(Task('Task b'));
 project1.addTask(Task('Task c'));
-const project2 = Project('Project 2');
+const project2 = Project('Project');
 project2.addTask(Task('Task d'));
-const project3 = Project('Project 3');
+const project3 = Project('Project');
 project3.addTask(Task('Task e'));
 project3.addTask(Task('Task f'));
 const projects = [project1, project2, project3];
@@ -34,11 +34,19 @@ const tasksDOM = (() => {
     dueDateInput.value = '';
   };
 
+  const setCurrentTask = (taskNode) => {
+    const currentActiveNode = node.querySelector('.current');
+    if (currentActiveNode) currentActiveNode.classList.remove('current');
+    if (currentActiveNode === taskNode) return;
+    taskNode.classList.add('current');
+  };
+
   const addTaskNode = (taskTitle) => {
     const listItem = document.createElement('li');
     listItem.innerText = taskTitle;
     listItem.classList.add('task-title');
     node.appendChild(listItem);
+    listItem.addEventListener('click', (event) => setCurrentTask(event.currentTarget));
   };
 
   const handleClick = () => {
@@ -76,7 +84,7 @@ const projectsDOM = (() => {
     const currentActiveNode = node.querySelector('.current');
     if (currentActiveNode) currentActiveNode.classList.remove('current');
     projectNode.classList.add('current');
-    const index = projects.map((project) => project.getTitle()).indexOf(projectNode.innerText);
+    const index = Array.prototype.indexOf.call(node.children, projectNode);
     currentProject = projects[index];
     tasksDOM.refresh();
     console.log(currentProject.getTitle());
@@ -92,10 +100,6 @@ const projectsDOM = (() => {
 
   const handleClick = () => {
     if (input.value === '') return;
-    if (projects.map((project) => project.getTitle()).indexOf(input.value) !== -1) {
-      alert('Project already exists. Enter a new name.');
-      return;
-    }
     addProjectNode(input.value);
     const newProject = Project(input.value);
     projects.push(newProject);
