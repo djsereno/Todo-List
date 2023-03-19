@@ -2,9 +2,22 @@ import './style.css';
 import Project from './project';
 import Task from './task';
 
-const defaultProject = Project('My Project');
-const projects = [defaultProject];
-let currentProject = defaultProject;
+// Dummy projects and tasks for debugging
+const project1 = Project('Project 1');
+project1.addTask(Task('Task a'));
+project1.addTask(Task('Task b'));
+project1.addTask(Task('Task c'));
+const project2 = Project('Project 2');
+project2.addTask(Task('Task d'));
+const project3 = Project('Project 3');
+project3.addTask(Task('Task e'));
+project3.addTask(Task('Task f'));
+const projects = [project1, project2, project3];
+let currentProject = project1;
+
+// const defaultProject = Project('My Project');
+// const projects = [defaultProject];
+// let currentProject = defaultProject;
 
 const tasksDOM = (() => {
   const node = document.querySelector('.task-list');
