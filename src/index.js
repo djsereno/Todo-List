@@ -13,11 +13,11 @@ const project3 = Project('Project');
 project3.addTask(Task('Task e'));
 project3.addTask(Task('Task f'));
 const projects = [project1, project2, project3];
-let currentProject = project1;
+let activeProject = project1;
 
 // const defaultProject = Project('My Project');
 // const projects = [defaultProject];
-// let currentProject = defaultProject;
+// let activeProject = defaultProject;
 
 const tasksDOM = (() => {
   const node = document.querySelector('.task-list');
@@ -34,11 +34,11 @@ const tasksDOM = (() => {
     dueDateInput.value = '';
   };
 
-  const setCurrentTask = (taskNode) => {
-    const currentActiveNode = node.querySelector('.current');
-    if (currentActiveNode) currentActiveNode.classList.remove('current');
+  const setActiveTask = (taskNode) => {
+    const currentActiveNode = node.querySelector('.active');
+    if (currentActiveNode) currentActiveNode.classList.remove('active');
     if (currentActiveNode === taskNode) return;
-    taskNode.classList.add('current');
+    taskNode.classList.add('active');
   };
 
   const addTaskNode = (taskTitle) => {
@@ -46,7 +46,7 @@ const tasksDOM = (() => {
     listItem.innerText = taskTitle;
     listItem.classList.add('task-title');
     node.appendChild(listItem);
-    listItem.addEventListener('click', (event) => setCurrentTask(event.currentTarget));
+    listItem.addEventListener('click', (event) => setActiveTask(event.currentTarget));
   };
 
   const handleClick = () => {
@@ -58,14 +58,14 @@ const tasksDOM = (() => {
       priorityInput.value,
       dueDateInput.value,
     );
-    currentProject.addTask(newTask);
+    activeProject.addTask(newTask);
     newTask.showDetails();
     clearForm();
   };
 
   const refresh = () => {
     node.innerHTML = '';
-    const tasks = currentProject.getTasks();
+    const tasks = activeProject.getTasks();
     tasks.forEach((task) => addTaskNode(task.getTitle()));
   };
 
@@ -80,14 +80,14 @@ const projectsDOM = (() => {
   const input = document.querySelector('#project-input');
   const addButton = document.querySelector('#add-project-btn');
 
-  const setCurrentProject = (projectNode) => {
-    const currentActiveNode = node.querySelector('.current');
-    if (currentActiveNode) currentActiveNode.classList.remove('current');
-    projectNode.classList.add('current');
+  const setActiveProject = (projectNode) => {
+    const currentActiveNode = node.querySelector('.active');
+    if (currentActiveNode) currentActiveNode.classList.remove('active');
+    projectNode.classList.add('active');
     const index = Array.prototype.indexOf.call(node.children, projectNode);
-    currentProject = projects[index];
+    activeProject = projects[index];
     tasksDOM.refresh();
-    console.log(currentProject.getTitle());
+    console.log(activeProject.getTitle());
   };
 
   const addProjectNode = (projectTitle) => {
@@ -95,7 +95,7 @@ const projectsDOM = (() => {
     listItem.innerText = projectTitle;
     listItem.classList.add('project-title');
     node.appendChild(listItem);
-    listItem.addEventListener('click', (event) => setCurrentProject(event.currentTarget));
+    listItem.addEventListener('click', (event) => setActiveProject(event.currentTarget));
   };
 
   const handleClick = () => {
@@ -109,7 +109,7 @@ const projectsDOM = (() => {
   const refresh = () => {
     node.innerHTML = '';
     projects.forEach((project) => addProjectNode(project.getTitle()));
-    setCurrentProject(node.firstChild);
+    setActiveProject(node.firstChild);
   };
 
   addButton.addEventListener('click', () => handleClick());
