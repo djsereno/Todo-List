@@ -1,15 +1,16 @@
+import './normalize.css';
 import './style.css';
 import Project from './project';
 import Task from './task';
 
 // Dummy projects and tasks for debugging
-const project1 = Project('Project');
+const project1 = Project('Project A');
 project1.addTask(Task('Task a'));
 project1.addTask(Task('Task b'));
 project1.addTask(Task('Task c', 'simple task', '', '01-02-03'));
-const project2 = Project('Project');
+const project2 = Project('Project B');
 project2.addTask(Task('Task d', 'urgent task', 'very-high', '11-22-33'));
-const project3 = Project('Project');
+const project3 = Project('Project C');
 project3.addTask(Task('Task e'));
 project3.addTask(Task('Task f'));
 const projects = [project1, project2, project3];
@@ -105,11 +106,11 @@ const projectsDOM = (() => {
   };
 
   const addProjectNode = (projectTitle) => {
-    const listItem = document.createElement('li');
-    listItem.innerText = projectTitle;
-    listItem.classList.add('project-title');
-    node.appendChild(listItem);
-    listItem.addEventListener('click', (event) => setActiveProject(event.currentTarget));
+    const button = document.createElement('button');
+    button.innerText = projectTitle;
+    button.classList.add('project-title');
+    node.appendChild(button);
+    button.addEventListener('click', (event) => setActiveProject(event.currentTarget));
   };
 
   const handleClick = () => {
