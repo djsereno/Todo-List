@@ -50,21 +50,21 @@ const tasksDOM = (() => {
     taskTitleGroup.classList.add('task-title-group');
     listItem.appendChild(taskTitleGroup);
 
-    const checkmarkContainer = document.createElement('div');
-    checkmarkContainer.classList.add('checkmark-container');
-    taskTitleGroup.appendChild(checkmarkContainer);
+    const checkboxContainer = document.createElement('div');
+    checkboxContainer.classList.add('checkbox-container');
+    taskTitleGroup.appendChild(checkboxContainer);
 
-    const checkmarkBackground = document.createElement('label');
-    checkmarkBackground.classList.add('checkmark-background');
-    checkmarkContainer.appendChild(checkmarkBackground);
+    const checkbox = document.createElement('label');
+    checkbox.classList.add('checkbox');
+    checkboxContainer.appendChild(checkbox);
 
-    const checkbox = document.createElement('input');
-    checkbox.setAttribute('type', 'checkbox');
-    checkmarkBackground.appendChild(checkbox);
+    const checkboxInput = document.createElement('input');
+    checkboxInput.setAttribute('type', 'checkbox');
+    checkbox.appendChild(checkboxInput);
 
     const checkmark = document.createElement('span');
     checkmark.classList.add('checkmark');
-    checkmarkBackground.appendChild(checkmark);
+    checkbox.appendChild(checkmark);
 
     const checkmarkSymbol = document.createElement('i');
     checkmarkSymbol.classList.add('fa-solid', 'fa-check');
