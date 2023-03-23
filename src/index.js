@@ -44,8 +44,36 @@ const tasksDOM = (() => {
 
   const addTaskNode = (task) => {
     const listItem = document.createElement('li');
-    listItem.innerText = task.getTitle();
-    listItem.classList.add('task-title');
+    listItem.classList.add('task');
+
+    const taskTitleGroup = document.createElement('div');
+    taskTitleGroup.classList.add('task-title-group');
+    listItem.appendChild(taskTitleGroup);
+
+    const checkmarkContainer = document.createElement('div');
+    checkmarkContainer.classList.add('checkmark-container');
+    taskTitleGroup.appendChild(checkmarkContainer);
+
+    const checkmarkBackground = document.createElement('label');
+    checkmarkBackground.classList.add('checkmark-background');
+    checkmarkContainer.appendChild(checkmarkBackground);
+
+    const checkbox = document.createElement('input');
+    checkbox.setAttribute('type', 'checkbox');
+    checkmarkBackground.appendChild(checkbox);
+
+    const checkmark = document.createElement('span');
+    checkmark.classList.add('checkmark');
+    checkmarkBackground.appendChild(checkmark);
+
+    const checkmarkSymbol = document.createElement('i');
+    checkmarkSymbol.classList.add('fa-solid', 'fa-check');
+    checkmark.appendChild(checkmarkSymbol);
+
+    const textContent = document.createElement('span');
+    textContent.classList.add('task-title');
+    textContent.innerText = task.getTitle();
+    taskTitleGroup.appendChild(textContent);
 
     const detailsList = document.createElement('ul');
     detailsList.classList.add('task-details');
