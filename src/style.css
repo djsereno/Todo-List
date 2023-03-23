@@ -54,12 +54,13 @@ main {
 .projects-list .project-title {
   height: 1.8rem;
   border: none;
-  background-color: transparent;
+  background-color: var(--color-sidebar);
   text-align: left;
+  transition: background-color 0.3s ease;
   cursor: pointer;
 }
 
-.projects-list .active {
+.projects-list .project-title.active {
   border-radius: 5px;
   background-color: var(--color-active);
   font-weight: 500;
