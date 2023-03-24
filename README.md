@@ -26,16 +26,15 @@
 
 - [x] Custom check boxes
 - [x] Nav bar
-- [x] Cleanup add task form
-  - [x] Display form button
-  - [x] Cleanup form styles
-- [ ] Cleanup add project form
-  - [ ] Display form button
-  - [ ] Cleanup form styles
-- [ ] Revise how project details are displayed
+- [x] Cleanup/reimplement add task form
+- [x] Cleanup/reimplement add project form
+- [ ] Store task completion state
+- [ ] Revise how task details are displayed
+- [ ] Task notes
+- [ ] Refactor JS to use inheritance where possible. There's a lot of redundant code right now.
+- [ ] Subtasks within a task
 - [ ] Task groups within a project
 - [ ] Project groups
-- [ ] Refactor JS to use inheritance where possible. There's a lot of redundant code right now.
 - [ ] Project icons/colors?
 - [ ] Footer
 

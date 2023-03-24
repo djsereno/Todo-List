@@ -19,14 +19,15 @@ let activeProject = project1;
 const tasksDOM = (() => {
   const node = document.querySelector('.task-container');
   const projectHeading = node.querySelector('.project-title');
-  const taskList = document.querySelector('.task-list');
-  const titleInput = document.querySelector('#title-input');
-  const descriptionInput = document.querySelector('#description-input');
-  const priorityInput = document.querySelector('#priority-input');
-  const dueDateInput = document.querySelector('#due-date-input');
-  const showFormButton = document.querySelector('.show-taskform-btn');
+  const showFormButton = node.querySelector('.show-taskform-btn');
+  const taskList = node.querySelector('.task-list');
+
   const addTaskForm = document.querySelector('.add-task-form');
-  const addButton = addTaskForm.querySelector('.add-task-btn');
+  const titleInput = addTaskForm.querySelector('.title-input');
+  const descriptionInput = addTaskForm.querySelector('.description-input');
+  const priorityInput = addTaskForm.querySelector('.priority-input');
+  const dueDateInput = addTaskForm.querySelector('.due-date-input');
+  const addButton = addTaskForm.querySelector('.submit-btn');
   const cancelButton = addTaskForm.querySelector('.cancel-btn');
 
   const setInteraction = (input) => {
@@ -131,52 +132,68 @@ const tasksDOM = (() => {
   showFormButton.addEventListener('click', () => displayAddForm());
   addButton.addEventListener('click', () => handleClick());
   cancelButton.addEventListener('click', () => clearForm());
-
   dueDateInput.addEventListener('change', () => setInteraction(dueDateInput));
   priorityInput.addEventListener('change', () => setInteraction(priorityInput));
-
   refresh();
 
   return { refresh };
 })();
 
 const projectsDOM = (() => {
-  const node = document.querySelector('.projects-list');
-  const input = document.querySelector('#project-input');
-  const addButton = document.querySelector('#add-project-btn');
+  const node = document.querySelector('.projects-container');
+  const showFormButton = node.querySelector('.show-projectform-btn');
+  const projectList = document.querySelector('.projects-list');
+
+  const addProjectForm = document.querySelector('.add-project-form');
+  const titleInput = addProjectForm.querySelector('.title-input');
+  const addButton = addProjectForm.querySelector('.submit-btn');
+  const cancelButton = addProjectForm.querySelector('.cancel-btn');
 
   const setActiveProject = (projectNode) => {
-    const currentActiveNode = node.querySelector('.active');
+    const currentActiveNode = projectList.querySelector('.active');
     if (currentActiveNode) currentActiveNode.classList.remove('active');
     projectNode.classList.add('active');
-    const index = Array.prototype.indexOf.call(node.children, projectNode);
+    const index = Array.prototype.indexOf.call(projectList.children, projectNode);
     activeProject = projects[index];
     tasksDOM.refresh();
+  };
+
+  const displayAddForm = () => {
+    addProjectForm.classList.add('visible');
+  };
+
+  const clearForm = () => {
+    titleInput.value = '';
+    addProjectForm.classList.remove('visible');
   };
 
   const addProjectNode = (projectTitle) => {
     const button = document.createElement('button');
     button.innerText = projectTitle;
     button.classList.add('project-title');
-    node.appendChild(button);
+    projectList.appendChild(button);
     button.addEventListener('click', (event) => setActiveProject(event.currentTarget));
   };
 
   const handleClick = () => {
-    if (input.value === '') return;
-    addProjectNode(input.value);
-    const newProject = Project(input.value);
+    if (titleInput.value === '') return;
+    addProjectNode(titleInput.value);
+    const newProject = Project(titleInput.value);
     projects.push(newProject);
-    input.value = '';
+    titleInput.value = '';
+    setActiveProject(projectList.lastChild);
+    clearForm();
   };
 
   const refresh = () => {
-    node.innerHTML = '';
+    projectList.innerHTML = '';
     projects.forEach((project) => addProjectNode(project.getTitle()));
-    setActiveProject(node.firstChild);
+    setActiveProject(projectList.firstChild);
   };
 
+  showFormButton.addEventListener('click', () => displayAddForm());
   addButton.addEventListener('click', () => handleClick());
+  cancelButton.addEventListener('click', () => clearForm());
   refresh();
 
   return { refresh };

@@ -71,8 +71,12 @@ header {
   overflow-y: auto;
 }
 
-.projects-container > h1 {
-  margin-top: 0;
+.projects-container .title-group {
+  margin-bottom: 1rem;
+}
+
+.projects-container .title-group > h1 {
+  margin: 0;
   font-size: 1.5rem;
 }
 
@@ -120,7 +124,12 @@ main {
   align-items: center;
 }
 
-.show-taskform-btn {
+.title-group .project-title {
+  margin: 0;
+}
+
+.show-taskform-btn,
+.show-projectform-btn {
   height: min-content;
   margin: 0;
   padding: 0.2rem 0.5rem;
@@ -133,7 +142,8 @@ main {
   cursor: pointer;
 }
 
-.show-taskform-btn:hover {
+.show-taskform-btn:hover,
+.show-projectform-btn:hover {
   color: var(--color-primary);
 }
 
@@ -176,7 +186,8 @@ main {
   position: absolute;
 }
 
-.add-task-form.visible {
+.add-task-form.visible,
+.add-project-form.visible {
   display: grid;
   grid-template-columns: 1fr min-content 1fr;
   grid-template-rows: 1fr min-content 1fr;
@@ -202,13 +213,13 @@ main {
   width: 100%;
   margin-bottom: 0.5rem;
   padding: 0.5rem 1rem;
-  border: none;
+  border: 1px solid var(--color-active);
   font-size: 1.5rem;
 }
 
 .form-content .details-container {
   display: flex;
-  gap: 5px;
+  gap: 8px;
 }
 
 .form-content .description-input,
@@ -237,7 +248,7 @@ main {
   display: grid;
   grid-template-columns: 1fr 1fr;
   width: max-content;
-  gap: 5px;
+  gap: 8px;
 }
 .form-content button {
   padding: 0.5rem 1rem;
@@ -253,7 +264,7 @@ main {
   border: 1px solid var(--color-active);
   background-color: white;
 }
-.form-content .add-task-btn {
+.form-content .submit-btn {
   background-color: var(--color-primary);
   color: white;
 }
