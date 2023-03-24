@@ -3,13 +3,19 @@
 :root {
   --color-sidebar: #f5f6f8;
   --color-active: #dce1e7;
+  --color-primary: #2196f3;
+  --color-dark: #383d3b;
+  --color-secondary: #fa9f42;
+  --header-height: 75px;
 }
 
 body,
 html {
+  position: relative;
   margin: 0;
   padding: 0;
   font-family: 'Ubuntu', sans-serif;
+  color: var(--color-dark);
 }
 
 * {
@@ -27,13 +33,46 @@ html {
 
 main {
   display: grid;
-  grid-template-columns: 300px 3fr;
+  grid-template-columns: 300px 1fr;
+  position: relative;
+  height: min-content;
+  margin-top: var(--header-height);
+}
+
+/* ---HEADER--- */
+header {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+  height: var(--header-height);
+  background-color: var(--color-primary);
+  user-select: none;
+}
+
+.brand {
+  margin: 0;
+  margin-left: 3rem;
+  padding: 0;
+  font-size: 2rem;
+  color: white;
+}
+
+.brand i {
+  margin-right: 1rem;
+}
+
+.brand .accent {
+  color: var(--color-dark);
 }
 
 /* ---SIDEBAR--- */
 
 .sidebar {
-  height: 100vh;
+  height: calc(100vh - var(--header-height));
   padding: 3rem 1.5rem;
   background-color: var(--color-sidebar);
 }
@@ -56,6 +95,7 @@ main {
   border: none;
   background-color: var(--color-sidebar);
   text-align: left;
+  color: inherit;
   transition: background-color 0.3s ease;
   cursor: pointer;
 }
@@ -149,19 +189,19 @@ main {
 /* Checkmark unchecked */
 .checkmark i {
   font-size: 0px;
-  color: #2196f3;
+  color: var(--color-primary);
   transition: all 0.5s ease;
 }
 
 /* Checkmark hover */
 .checkbox:hover .checkmark {
-  border: 2px solid #2196f3;
+  border: 2px solid var(--color-primary);
 }
 
 /* Checkmark checked */
 .checkbox input:checked ~ .checkmark {
-  border: 2px solid #2196f3;
-  background-color: #2196f3;
+  border: 2px solid var(--color-primary);
+  background-color: var(--color-primary);
 }
 .checkbox input:checked ~ .checkmark i {
   display: block;

@@ -25,7 +25,8 @@
 ## Roadmap
 
 - [x] Custom check boxes
-- [ ] Nav bar
+- [x] Nav bar
+  - [ ] Fix issues with content overflow
 - [ ] Cleanup add task form
   - [ ] Display form button
   - [ ] Cleanup form styles

@@ -5,10 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://kit.fontawesome.com/e89148c565.js" crossorigin="anonymous"></script>
-    <title>Webpack App!!!</title>
+    <title>ToDo.List</title>
   </head>
   <body>
-    <header></header>
+    <header>
+      <h1 class="brand">
+        <i class="fa-solid fa-inbox"></i><span>ToDo</span><span class="accent">.List</span>
+      </h1>
+    </header>
     <main>
       <div class="sidebar">
         <div class="projects-container">
@@ -20,44 +24,32 @@
       <div class="main-content">
         <div class="task-container">
           <h1 class="project-title">Tasks</h1>
-          <ul class="task-list">
-            <!-- <li>
-              <div class="task-title-group">
-                <div class="checkmark-container">
-                  <label class="checkmark-background">
-                    <input type="checkbox" />
-                    <span class="checkmark"><i class="fa-solid fa-check"></i></span>
-                  </label>
-                </div>
-                <span class="task-title">This is a task</span>
-              </div>
-            </li> -->
-          </ul>
+          <ul class="task-list"></ul>
         </div>
       </div>
-
-      <form action="" class="add-project-form">
-        <input type="text" id="project-input" placeholder="Add a project" />
-        <button type="button" class="cancel-btn">Cancel</button>
-        <button type="button" id="add-project-btn">Add Project</button>
-      </form>
-
-      <form action="" class="add-task-form">
-        <input type="text" id="task-title" placeholder="Add a task" />
-        <input type="text" id="task-description" placeholder="Description" />
-        <select id="task-priority">
-          <option value="" selected disabled hidden>Priority</option>
-          <option value="very-high">Very High</option>
-          <option value="high">High</option>
-          <option value="normal">Normal</option>
-          <option value="low">Low</option>
-        </select>
-        <input type="date" id="task-due-date" placeholder="Due date" />
-
-        <button type="button" class="cancel-btn">Cancel</button>
-        <button type="button" id="add-task-btn">Add Task</button>
-      </form>
     </main>
+    
+    <form action="" class="add-project-form">
+      <input type="text" id="project-input" placeholder="Add a project" />
+      <button type="button" class="cancel-btn">Cancel</button>
+      <button type="button" id="add-project-btn">Add Project</button>
+    </form>
+
+    <form action="" class="add-task-form">
+      <input type="text" id="task-title" placeholder="Add a task" />
+      <input type="text" id="task-description" placeholder="Description" />
+      <select id="task-priority">
+        <option value="" selected disabled hidden>Priority</option>
+        <option value="very-high">Very High</option>
+        <option value="high">High</option>
+        <option value="normal">Normal</option>
+        <option value="low">Low</option>
+      </select>
+      <input type="date" id="task-due-date" placeholder="Due date" />
+
+      <button type="button" class="cancel-btn">Cancel</button>
+      <button type="button" id="add-task-btn">Add Task</button>
+    </form>
     <footer></footer>
   </body>
 </html>
