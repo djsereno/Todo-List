@@ -23,7 +23,7 @@
       <div class="task-container">
         <div class="title-group">
           <h1 class="project-title"></h1>
-          <button class="add-task-btn"><i class="fa-solid fa-plus"></i></button>
+          <button class="show-taskform-btn"><i class="fa-solid fa-plus"></i></button>
         </div>
         <ul class="task-list"></ul>
       </div>
@@ -37,19 +37,29 @@
     </form>
 
     <form action="" class="add-task-form">
-      <input type="text" id="task-title" placeholder="Add a task" />
-      <input type="text" id="task-description" placeholder="Description" />
-      <select id="task-priority">
-        <option value="" selected disabled hidden>Priority</option>
-        <option value="very-high">Very High</option>
-        <option value="high">High</option>
-        <option value="normal">Normal</option>
-        <option value="low">Low</option>
-      </select>
-      <input type="date" id="task-due-date" placeholder="Due date" />
-
-      <button type="button" class="cancel-btn">Cancel</button>
-      <button type="button" id="add-task-btn">Add Task</button>
+      <div class="form-content">
+        <input type="text" id="title-input" class="title-input" placeholder="Add a task..." />
+        <div class="details-container">
+          <input
+            type="text"
+            id="description-input"
+            class="description-input"
+            placeholder="Description"
+          />
+          <select id="priority-input" class="priority-input">
+            <option value="" selected disabled hidden>Priority</option>
+            <option value="very-high">Very High</option>
+            <option value="high">High</option>
+            <option value="normal">Normal</option>
+            <option value="low">Low</option>
+          </select>
+          <input type="date" id="due-date-input" class="due-date-input placeholder="Due date" />
+          <div class="button-group">
+            <button type="button" class="cancel-btn">Cancel</button>
+            <button type="button" class="add-task-btn">Add Task</button>
+          </div>
+        </div>
+      </div>
     </form>
   </body>
 </html>

@@ -24,17 +24,21 @@ const tasksDOM = (() => {
   const node = document.querySelector('.task-container');
   const projectHeading = node.querySelector('.project-title');
   const taskList = document.querySelector('.task-list');
-  const titleInput = document.querySelector('#task-title');
-  const descriptionInput = document.querySelector('#task-description');
-  const priorityInput = document.querySelector('#task-priority');
-  const dueDateInput = document.querySelector('#task-due-date');
-  const addButton = document.querySelector('.add-task-btn');
+  const titleInput = document.querySelector('#title-input');
+  const descriptionInput = document.querySelector('#description-input');
+  const priorityInput = document.querySelector('#priority-input');
+  const dueDateInput = document.querySelector('#due-date-input');
+  const showFormButton = document.querySelector('.show-taskform-btn');
+  const addTaskForm = document.querySelector('.add-task-form');
+  const addButton = addTaskForm.querySelector('.add-task-btn');
+  const cancelButton = addTaskForm.querySelector('.cancel-btn');
 
   const clearForm = () => {
     titleInput.value = '';
     descriptionInput.value = '';
     priorityInput.value = '';
     dueDateInput.value = '';
+    addTaskForm.classList.remove('visible');
   };
 
   const setActiveTask = (taskNode) => {
@@ -95,6 +99,7 @@ const tasksDOM = (() => {
   };
 
   const handleClick = () => {
+    console.log('click');
     if (titleInput.value === '') return;
     const task = Task(
       titleInput.value,
@@ -108,6 +113,11 @@ const tasksDOM = (() => {
     clearForm();
   };
 
+  const displayAddForm = () => {
+    console.log('show form');
+    addTaskForm.classList.add('visible');
+  };
+
   const refresh = () => {
     projectHeading.innerText = activeProject.getTitle();
     taskList.innerHTML = '';
@@ -115,7 +125,9 @@ const tasksDOM = (() => {
     tasks.forEach((task) => addTaskNode(task));
   };
 
+  showFormButton.addEventListener('click', () => displayAddForm());
   addButton.addEventListener('click', () => handleClick());
+  cancelButton.addEventListener('click', () => clearForm());
   refresh();
 
   return { refresh };
