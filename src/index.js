@@ -16,10 +16,6 @@ project3.addTask(Task('Task f'));
 const projects = [project1, project2, project3];
 let activeProject = project1;
 
-// const defaultProject = Project('My Project');
-// const projects = [defaultProject];
-// let activeProject = defaultProject;
-
 const tasksDOM = (() => {
   const node = document.querySelector('.task-container');
   const projectHeading = node.querySelector('.project-title');
@@ -32,8 +28,6 @@ const tasksDOM = (() => {
   const addTaskForm = document.querySelector('.add-task-form');
   const addButton = addTaskForm.querySelector('.add-task-btn');
   const cancelButton = addTaskForm.querySelector('.cancel-btn');
-
-  console.log(priorityInput.value);
 
   const setInteraction = (input) => {
     if (input.value !== '') {
@@ -111,7 +105,6 @@ const tasksDOM = (() => {
   };
 
   const handleClick = () => {
-    console.log('click');
     if (titleInput.value === '') return;
     const task = Task(
       titleInput.value,
@@ -121,12 +114,10 @@ const tasksDOM = (() => {
     );
     addTaskNode(task);
     activeProject.addTask(task);
-    console.table(task.getDetails());
     clearForm();
   };
 
   const displayAddForm = () => {
-    console.log('show form');
     addTaskForm.classList.add('visible');
   };
 
@@ -161,7 +152,6 @@ const projectsDOM = (() => {
     const index = Array.prototype.indexOf.call(node.children, projectNode);
     activeProject = projects[index];
     tasksDOM.refresh();
-    console.log(activeProject.getTitle());
   };
 
   const addProjectNode = (projectTitle) => {

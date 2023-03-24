@@ -26,9 +26,9 @@
 
 - [x] Custom check boxes
 - [x] Nav bar
-- [ ] Cleanup add task form
-  - [ ] Display form button
-  - [ ] Cleanup form styles
+- [x] Cleanup add task form
+  - [x] Display form button
+  - [x] Cleanup form styles
 - [ ] Cleanup add project form
   - [ ] Display form button
   - [ ] Cleanup form styles
