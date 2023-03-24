@@ -21,12 +21,14 @@ let activeProject = project1;
 // let activeProject = defaultProject;
 
 const tasksDOM = (() => {
-  const node = document.querySelector('.task-list');
+  const node = document.querySelector('.task-container');
+  const projectHeading = node.querySelector('.project-title');
+  const taskList = document.querySelector('.task-list');
   const titleInput = document.querySelector('#task-title');
   const descriptionInput = document.querySelector('#task-description');
   const priorityInput = document.querySelector('#task-priority');
   const dueDateInput = document.querySelector('#task-due-date');
-  const addButton = document.querySelector('#add-task-btn');
+  const addButton = document.querySelector('.add-task-btn');
 
   const clearForm = () => {
     titleInput.value = '';
@@ -36,7 +38,7 @@ const tasksDOM = (() => {
   };
 
   const setActiveTask = (taskNode) => {
-    const currentActiveNode = node.querySelector('.active');
+    const currentActiveNode = taskList.querySelector('.active');
     if (currentActiveNode) currentActiveNode.classList.remove('active');
     if (currentActiveNode === taskNode) return;
     taskNode.classList.add('active');
@@ -88,7 +90,7 @@ const tasksDOM = (() => {
       detailsList.appendChild(detailItem);
     });
 
-    node.appendChild(listItem);
+    taskList.appendChild(listItem);
     listItem.addEventListener('click', (event) => setActiveTask(event.currentTarget));
   };
 
@@ -107,7 +109,8 @@ const tasksDOM = (() => {
   };
 
   const refresh = () => {
-    node.innerHTML = '';
+    projectHeading.innerText = activeProject.getTitle();
+    taskList.innerHTML = '';
     const tasks = activeProject.getTasks();
     tasks.forEach((task) => addTaskNode(task));
   };
