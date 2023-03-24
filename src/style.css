@@ -217,11 +217,20 @@ main {
   border: 1px solid var(--color-active);
   padding: 0.2rem 1rem;
   background-color: white;
+}
+
+.form-content .priority-input,
+.form-content .due-date-input {
   color: grey;
 }
 
-.form-content .due-date-input::placeholder {
-  color: grey;
+.form-content .priority-input.interacted,
+.form-content .due-date-input.interacted {
+  color: black;
+}
+
+.form-content .priority-input option {
+  color: black;
 }
 
 .form-content .button-group {

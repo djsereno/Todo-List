@@ -33,11 +33,23 @@ const tasksDOM = (() => {
   const addButton = addTaskForm.querySelector('.add-task-btn');
   const cancelButton = addTaskForm.querySelector('.cancel-btn');
 
+  console.log(priorityInput.value);
+
+  const setInteraction = (input) => {
+    if (input.value !== '') {
+      input.classList.add('interacted');
+    } else {
+      input.classList.remove('interacted');
+    }
+  };
+
   const clearForm = () => {
     titleInput.value = '';
     descriptionInput.value = '';
     priorityInput.value = '';
+    setInteraction(priorityInput);
     dueDateInput.value = '';
+    setInteraction(dueDateInput);
     addTaskForm.classList.remove('visible');
   };
 
@@ -128,6 +140,10 @@ const tasksDOM = (() => {
   showFormButton.addEventListener('click', () => displayAddForm());
   addButton.addEventListener('click', () => handleClick());
   cancelButton.addEventListener('click', () => clearForm());
+
+  dueDateInput.addEventListener('change', () => setInteraction(dueDateInput));
+  priorityInput.addEventListener('change', () => setInteraction(priorityInput));
+
   refresh();
 
   return { refresh };
