@@ -73,6 +73,11 @@ const tasksDOM = (() => {
 
     const checkboxInput = document.createElement('input');
     checkboxInput.setAttribute('type', 'checkbox');
+    checkboxInput.checked = task.getCompletion();
+    checkboxInput.addEventListener('change', () => {
+      task.setCompletion(checkboxInput.checked);
+      console.table(task.getDetails());
+    });
     checkbox.appendChild(checkboxInput);
 
     const checkmark = document.createElement('span');

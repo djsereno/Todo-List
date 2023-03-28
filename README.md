@@ -28,7 +28,7 @@
 - [x] Nav bar
 - [x] Cleanup/reimplement add task form
 - [x] Cleanup/reimplement add project form
-- [ ] Store task completion state
+- [x] Store task completion state
 - [ ] Revise how task details are displayed
 - [ ] Task notes
 - [ ] Refactor JS to use inheritance where possible. There's a lot of redundant code right now.
