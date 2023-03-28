@@ -113,6 +113,11 @@ main {
   overflow-y: auto;
 }
 
+.task-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
 .task-container > h1 {
   margin-top: 0;
   font-size: 2rem;
@@ -168,14 +173,18 @@ main {
 .task-title {
   display: grid;
   align-items: center;
-  padding: 0.7rem 0;
+  padding: 1rem 0;
 }
 
-.task-details {
+.main-details {
+  margin-left: 2.5rem;
+}
+
+.fine-details {
   display: none;
 }
 
-.task.active .task-details {
+.task.active .fine-details {
   display: block;
 }
 
@@ -302,8 +311,8 @@ footer {
 
 .checkmark {
   display: grid;
-  width: 25px;
-  height: 25px;
+  width: 1.5rem;
+  height: 1.5rem;
   border: 1px solid var(--color-active);
   border-radius: 50%;
   background-color: white;
@@ -331,6 +340,6 @@ footer {
 }
 .checkbox input:checked ~ .checkmark i {
   display: block;
-  font-size: 15px;
+  font-size: 0.9rem;
   color: white;
 }

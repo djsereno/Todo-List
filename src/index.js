@@ -7,7 +7,7 @@ import Task from './task';
 const project1 = Project('Project A');
 project1.addTask(Task('Task a'));
 project1.addTask(Task('Task b'));
-project1.addTask(Task('Task c', 'simple task', '', '01-02-03'));
+project1.addTask(Task('Task c', 'simple task', 'high', '01-02-03'));
 const project2 = Project('Project B');
 project2.addTask(Task('Task d', 'urgent task', 'very-high', '11-22-33'));
 const project3 = Project('Project C');
@@ -74,10 +74,7 @@ const tasksDOM = (() => {
     const checkboxInput = document.createElement('input');
     checkboxInput.setAttribute('type', 'checkbox');
     checkboxInput.checked = task.getCompletion();
-    checkboxInput.addEventListener('change', () => {
-      task.setCompletion(checkboxInput.checked);
-      console.table(task.getDetails());
-    });
+    checkboxInput.addEventListener('change', () => task.setCompletion(checkboxInput.checked));
     checkbox.appendChild(checkboxInput);
 
     const checkmark = document.createElement('span');
@@ -88,14 +85,32 @@ const tasksDOM = (() => {
     checkmarkSymbol.classList.add('fa-solid', 'fa-check');
     checkmark.appendChild(checkmarkSymbol);
 
-    const textContent = document.createElement('span');
-    textContent.classList.add('task-title');
-    textContent.innerText = task.getTitle();
-    taskTitleGroup.appendChild(textContent);
+    const taskTitle = document.createElement('span');
+    taskTitle.classList.add('task-title');
+    taskTitle.innerText = task.getTitle();
+    taskTitleGroup.appendChild(taskTitle);
 
-    const detailsList = document.createElement('ul');
-    detailsList.classList.add('task-details');
-    listItem.appendChild(detailsList);
+    const mainDetails = document.createElement('div');
+    mainDetails.classList.add('main-details');
+    listItem.appendChild(mainDetails);
+
+    if (task.getPriority() !== 'normal') {
+      const priority = document.createElement('span');
+      priority.classList.add('tag', 'priority');
+      priority.innerText = task.getPriority();
+      mainDetails.appendChild(priority);
+    }
+
+    if (task.getDueDate()) {
+      const dueDate = document.createElement('span');
+      dueDate.classList.add('tag', 'due-date');
+      dueDate.innerText = task.getDueDate();
+      mainDetails.appendChild(dueDate);
+    }
+
+    const fineDetails = document.createElement('ul');
+    fineDetails.classList.add('fine-details');
+    listItem.appendChild(fineDetails);
 
     const taskDetails = task.getDetails();
     Object.keys(taskDetails).forEach((key) => {
@@ -103,7 +118,7 @@ const tasksDOM = (() => {
       const detailItem = document.createElement('li');
       detailItem.innerText = `${key}: ${taskDetails[key]}`;
       detailItem.classList.add('task-detail', key);
-      detailsList.appendChild(detailItem);
+      fineDetails.appendChild(detailItem);
     });
 
     taskList.appendChild(listItem);
