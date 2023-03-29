@@ -90,46 +90,55 @@ const tasksDOM = (() => {
     taskTitle.innerText = task.getTitle();
     taskTitleGroup.appendChild(taskTitle);
 
-    const mainDetails = document.createElement('div');
-    mainDetails.classList.add('main-details');
-    listItem.appendChild(mainDetails);
-
-    if (task.getDueDate()) {
-      const dueDate = document.createElement('span');
-      const symbol = document.createElement('i');
-      symbol.classList.add('fa-solid', 'fa-calendar-days');
-      dueDate.appendChild(symbol);
-      const text = document.createElement('span');
-      text.innerText = `\u00A0\u00A0${task.getDueDate()}`;
-      dueDate.appendChild(text);
-      dueDate.classList.add('tag', 'due-date');
-      mainDetails.appendChild(dueDate);
+    if (task.getDescription()) {
+      const description = document.createElement('span');
+      description.classList.add('description');
+      description.innerText = task.getDescription();
+      listItem.appendChild(description);
     }
 
-    if (task.getPriority() !== 'normal') {
-      const priority = document.createElement('span');
-      const symbol = document.createElement('i');
-      symbol.classList.add('fa-solid', 'fa-flag');
-      priority.appendChild(symbol);
-      const text = document.createElement('span');
-      text.innerText = `\u00A0\u00A0${task.getPriority()}`;
-      priority.appendChild(text);
-      priority.classList.add('tag', 'priority');
-      mainDetails.appendChild(priority);
+    if (task.getDueDate() || task.getPriority() !== 'normal') {
+      const mainDetails = document.createElement('div');
+      mainDetails.classList.add('main-details');
+      listItem.appendChild(mainDetails);
+
+      if (task.getDueDate()) {
+        const dueDate = document.createElement('span');
+        const symbol = document.createElement('i');
+        symbol.classList.add('fa-solid', 'fa-calendar-days');
+        dueDate.appendChild(symbol);
+        const text = document.createElement('span');
+        text.innerText = `\u00A0\u00A0${task.getDueDate()}`;
+        dueDate.appendChild(text);
+        dueDate.classList.add('tag', 'due-date');
+        mainDetails.appendChild(dueDate);
+      }
+
+      if (task.getPriority() !== 'normal') {
+        const priority = document.createElement('span');
+        const symbol = document.createElement('i');
+        symbol.classList.add('fa-solid', 'fa-flag');
+        priority.appendChild(symbol);
+        const text = document.createElement('span');
+        text.innerText = `\u00A0\u00A0${task.getPriority()}`;
+        priority.appendChild(text);
+        priority.classList.add('tag', 'priority');
+        mainDetails.appendChild(priority);
+      }
     }
 
-    const fineDetails = document.createElement('ul');
-    fineDetails.classList.add('fine-details');
-    listItem.appendChild(fineDetails);
+    // const fineDetails = document.createElement('ul');
+    // fineDetails.classList.add('fine-details');
+    // listItem.appendChild(fineDetails);
 
-    const taskDetails = task.getDetails();
-    Object.keys(taskDetails).forEach((key) => {
-      if (key === 'title' || taskDetails[key] === null) return;
-      const detailItem = document.createElement('li');
-      detailItem.innerText = `${key}: ${taskDetails[key]}`;
-      detailItem.classList.add('task-detail', key);
-      fineDetails.appendChild(detailItem);
-    });
+    // const taskDetails = task.getDetails();
+    // Object.keys(taskDetails).forEach((key) => {
+    //   if (key === 'title' || taskDetails[key] === null) return;
+    //   const detailItem = document.createElement('li');
+    //   detailItem.innerText = `${key}: ${taskDetails[key]}`;
+    //   detailItem.classList.add('task-detail', key);
+    //   fineDetails.appendChild(detailItem);
+    // });
 
     taskList.appendChild(listItem);
     listItem.addEventListener('click', (event) => setActiveTask(event.currentTarget));
