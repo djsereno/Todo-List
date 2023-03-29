@@ -1,8 +1,9 @@
-const Task = (title, description, priority, dueDate) => {
+const Task = (title, description, priority, dueDate, notes) => {
   let _title = title;
   let _description = description || null;
   let _priority = priority || 'normal';
   let _dueDate = dueDate || null;
+  let _notes = notes || null;
   let _completion = false;
 
   const getDetails = () => ({
@@ -16,6 +17,7 @@ const Task = (title, description, priority, dueDate) => {
   const getDescription = () => _description;
   const getDueDate = () => _dueDate;
   const getPriority = () => _priority;
+  const getNotes = () => _notes;
   const getCompletion = () => _completion;
 
   const setTitle = (newTitle) => {
@@ -30,6 +32,9 @@ const Task = (title, description, priority, dueDate) => {
   const setPriority = (newPriority) => {
     _priority = newPriority;
   };
+  const setNotes = (newNotes) => {
+    _notes = newNotes;
+  };
   const setCompletion = (newCompletion) => {
     _completion = newCompletion;
   };
@@ -41,10 +46,12 @@ const Task = (title, description, priority, dueDate) => {
     getDueDate,
     getPriority,
     getCompletion,
+    getNotes,
     setTitle,
     setDescription,
     setDueDate,
     setPriority,
+    setNotes,
     setCompletion,
   };
 };

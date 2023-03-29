@@ -5,7 +5,7 @@ import Task from './task';
 
 // Dummy projects and tasks for debugging
 const project1 = Project('Project A');
-project1.addTask(Task('Task a', 'simple task', 'very-high', '01-02-03'));
+project1.addTask(Task('Task a', 'simple task', 'very-high', '01-02-03', 'notes, notes, notes...'));
 project1.addTask(Task('Task b'));
 project1.addTask(Task('Task c', 'simple task', 'high', '01-02-03'));
 const project2 = Project('Project B');
@@ -27,6 +27,7 @@ const tasksDOM = (() => {
   const descriptionInput = addTaskForm.querySelector('.description-input');
   const priorityInput = addTaskForm.querySelector('.priority-input');
   const dueDateInput = addTaskForm.querySelector('.due-date-input');
+  const notesInput = addTaskForm.querySelector('.notes-input');
   const addButton = addTaskForm.querySelector('.submit-btn');
   const cancelButton = addTaskForm.querySelector('.cancel-btn');
 
@@ -42,8 +43,9 @@ const tasksDOM = (() => {
     titleInput.value = '';
     descriptionInput.value = '';
     priorityInput.value = '';
-    setInteraction(priorityInput);
+    notesInput.value = '';
     dueDateInput.value = '';
+    setInteraction(priorityInput);
     setInteraction(dueDateInput);
     addTaskForm.classList.remove('visible');
   };
@@ -59,9 +61,13 @@ const tasksDOM = (() => {
     const listItem = document.createElement('li');
     listItem.classList.add('task');
 
+    const taskInfo = document.createElement('div');
+    taskInfo.classList.add('task-info');
+    listItem.appendChild(taskInfo);
+
     const taskTitleGroup = document.createElement('div');
     taskTitleGroup.classList.add('task-title-group');
-    listItem.appendChild(taskTitleGroup);
+    taskInfo.appendChild(taskTitleGroup);
 
     const checkboxContainer = document.createElement('div');
     checkboxContainer.classList.add('checkbox-container');
@@ -94,13 +100,13 @@ const tasksDOM = (() => {
       const description = document.createElement('span');
       description.classList.add('description');
       description.innerText = task.getDescription();
-      listItem.appendChild(description);
+      taskInfo.appendChild(description);
     }
 
     if (task.getDueDate() || task.getPriority() !== 'normal') {
-      const mainDetails = document.createElement('div');
-      mainDetails.classList.add('main-details');
-      listItem.appendChild(mainDetails);
+      const tagsGroup = document.createElement('div');
+      tagsGroup.classList.add('tags-group');
+      taskInfo.appendChild(tagsGroup);
 
       if (task.getDueDate()) {
         const dueDate = document.createElement('span');
@@ -111,7 +117,7 @@ const tasksDOM = (() => {
         text.innerText = `\u00A0\u00A0${task.getDueDate()}`;
         dueDate.appendChild(text);
         dueDate.classList.add('tag', 'due-date');
-        mainDetails.appendChild(dueDate);
+        tagsGroup.appendChild(dueDate);
       }
 
       if (task.getPriority() !== 'normal') {
@@ -123,14 +129,25 @@ const tasksDOM = (() => {
         text.innerText = `\u00A0\u00A0${task.getPriority()}`;
         priority.appendChild(text);
         priority.classList.add('tag', 'priority');
-        mainDetails.appendChild(priority);
+        tagsGroup.appendChild(priority);
       }
     }
 
-    // const fineDetails = document.createElement('ul');
-    // fineDetails.classList.add('fine-details');
-    // listItem.appendChild(fineDetails);
+    if (task.getNotes()) {
+      const fineDetails = document.createElement('span');
+      fineDetails.classList.add('fine-details');
 
+      const label = document.createElement('label');
+      label.innerText = 'Notes:';
+      fineDetails.appendChild(label);
+
+      const notesText = document.createElement('div');
+      notesText.classList.add('notes');
+      notesText.innerText = task.getNotes();
+      fineDetails.appendChild(notesText);
+
+      listItem.appendChild(fineDetails);
+    }
     // const taskDetails = task.getDetails();
     // Object.keys(taskDetails).forEach((key) => {
     //   if (key === 'title' || taskDetails[key] === null) return;
@@ -141,7 +158,7 @@ const tasksDOM = (() => {
     // });
 
     taskList.appendChild(listItem);
-    listItem.addEventListener('click', (event) => setActiveTask(event.currentTarget));
+    taskInfo.addEventListener('click', (event) => setActiveTask(listItem));
   };
 
   const handleClick = () => {
@@ -151,6 +168,7 @@ const tasksDOM = (() => {
       descriptionInput.value,
       priorityInput.value,
       dueDateInput.value,
+      notesInput.value,
     );
     addTaskNode(task);
     activeProject.addTask(task);

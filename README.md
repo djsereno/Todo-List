@@ -30,7 +30,8 @@
 - [x] Cleanup/reimplement add project form
 - [x] Store task completion state
 - [x] Revise how task details are displayed
-- [ ] Task notes
+- [x] Task notes
+  - [ ] Make task notes editable
 - [ ] Refactor JS to use inheritance where possible. There's a lot of redundant code right now.
 - [ ] Subtasks within a task
 - [ ] Task groups within a project

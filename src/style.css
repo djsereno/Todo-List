@@ -163,10 +163,13 @@ main {
 }
 
 .task {
-  display: flex;
-  flex-direction: column;
   padding: 1rem 2.5rem;
   background-color: white;
+}
+
+.task-info {
+  display: flex;
+  flex-direction: column;
   gap: 0.4rem;
 }
 
@@ -185,7 +188,7 @@ main {
   color: grey;
 }
 
-.main-details {
+.tags-group {
   display: flex;
   gap: 0.3rem;
 }
@@ -202,7 +205,23 @@ main {
 }
 
 .task.active .fine-details {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+  gap: 0.4rem;
+}
+
+.fine-details label {
+  font-size: 0.9rem;
+  color: grey;
+}
+
+.fine-details .notes {
+  font-size: 0.9rem;
+  margin: 0;
+  color: grey;
+  padding: 0.2rem 1rem;
+  height: max-content;
 }
 
 /* ---ADD TASK FORM--- */
