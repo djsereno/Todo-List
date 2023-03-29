@@ -177,7 +177,18 @@ main {
 }
 
 .main-details {
+  padding-bottom: 1rem;
   margin-left: 2.5rem;
+  margin-top: -0.5rem;
+  display: flex;
+  gap: 0.3rem;
+}
+
+.tag {
+  background-color: var(--color-active);
+  border-radius: 5px;
+  font-size: .9rem;
+  padding: 0.2rem 0.5rem;
 }
 
 .fine-details {

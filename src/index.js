@@ -5,7 +5,7 @@ import Task from './task';
 
 // Dummy projects and tasks for debugging
 const project1 = Project('Project A');
-project1.addTask(Task('Task a'));
+project1.addTask(Task('Task a', 'simple task', 'very-high', '01-02-03'));
 project1.addTask(Task('Task b'));
 project1.addTask(Task('Task c', 'simple task', 'high', '01-02-03'));
 const project2 = Project('Project B');
@@ -94,18 +94,28 @@ const tasksDOM = (() => {
     mainDetails.classList.add('main-details');
     listItem.appendChild(mainDetails);
 
-    if (task.getPriority() !== 'normal') {
-      const priority = document.createElement('span');
-      priority.classList.add('tag', 'priority');
-      priority.innerText = task.getPriority();
-      mainDetails.appendChild(priority);
-    }
-
     if (task.getDueDate()) {
       const dueDate = document.createElement('span');
+      const symbol = document.createElement('i');
+      symbol.classList.add('fa-solid', 'fa-calendar-days');
+      dueDate.appendChild(symbol);
+      const text = document.createElement('span');
+      text.innerText = `\u00A0\u00A0${task.getDueDate()}`;
+      dueDate.appendChild(text);
       dueDate.classList.add('tag', 'due-date');
-      dueDate.innerText = task.getDueDate();
       mainDetails.appendChild(dueDate);
+    }
+
+    if (task.getPriority() !== 'normal') {
+      const priority = document.createElement('span');
+      const symbol = document.createElement('i');
+      symbol.classList.add('fa-solid', 'fa-flag');
+      priority.appendChild(symbol);
+      const text = document.createElement('span');
+      text.innerText = `\u00A0\u00A0${task.getPriority()}`;
+      priority.appendChild(text);
+      priority.classList.add('tag', 'priority');
+      mainDetails.appendChild(priority);
     }
 
     const fineDetails = document.createElement('ul');
