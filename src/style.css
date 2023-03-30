@@ -163,7 +163,7 @@ main {
 }
 
 .task {
-  padding: 1rem 2.5rem;
+  padding: 1rem 1rem 1rem 2.5rem;
   background-color: white;
 }
 
@@ -171,17 +171,35 @@ main {
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
+  cursor: pointer;
 }
 
 .task-title-group {
   display: grid;
-  grid-template-columns: max-content 1fr;
+  grid-template-columns: auto 1fr auto auto;
   margin-left: -2.5rem;
+  align-items: center;
 }
 
 .task-title {
   display: grid;
-  align-items: center;
+}
+
+.task-title-group i {
+  transform: scale(0);
+  transition: transform 0.1s;
+  padding-left: 0.5rem;
+  cursor: pointer;
+}
+.task-info:hover i {
+  transform: scale(1);
+  transition: transform 0.1s;
+}
+.task-title-group .edit:hover {
+  filter: brightness(2);
+}
+.task-title-group .delete:hover {
+  color: firebrick;
 }
 
 .description {
@@ -263,7 +281,6 @@ main {
   border: 1px solid var(--color-active);
   font-size: 1.5rem;
 }
-
 .form-content .details-container {
   display: grid;
   grid-template-columns: 1fr max-content max-content;

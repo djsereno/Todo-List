@@ -63,6 +63,7 @@ const tasksDOM = (() => {
 
     const taskInfo = document.createElement('div');
     taskInfo.classList.add('task-info');
+    taskInfo.addEventListener('click', () => displayAddForm(task));
     listItem.appendChild(taskInfo);
 
     const taskTitleGroup = document.createElement('div');
@@ -93,15 +94,23 @@ const tasksDOM = (() => {
 
     const taskTitle = document.createElement('span');
     taskTitle.classList.add('task-title');
-    taskTitle.setAttribute('contentEditable', true);
+    // taskTitle.setAttribute('contentEditable', true);
     taskTitle.innerText = task.getTitle();
     taskTitle.addEventListener('input', () => task.setTitle(taskTitle.innerText));
     taskTitleGroup.appendChild(taskTitle);
 
+    const editSymbol = document.createElement('i');
+    editSymbol.classList.add('fa-regular', 'fa-pen-to-square', 'edit');
+    taskTitleGroup.appendChild(editSymbol);
+
+    const trashSymbol = document.createElement('i');
+    trashSymbol.classList.add('fa-regular', 'fa-trash-can', 'delete');
+    taskTitleGroup.appendChild(trashSymbol);
+
     if (task.getDescription()) {
       const description = document.createElement('span');
       description.classList.add('description');
-      description.setAttribute('contentEditable', true);
+      // description.setAttribute('contentEditable', true);
       description.innerText = task.getDescription();
       description.addEventListener('input', () => task.setDescription(description.innerText));
       taskInfo.appendChild(description);
@@ -179,8 +188,15 @@ const tasksDOM = (() => {
     clearForm();
   };
 
-  const displayAddForm = () => {
+  const displayAddForm = (task) => {
     addTaskForm.classList.add('visible');
+    if (task) {
+      titleInput.value = task.getTitle();
+      descriptionInput.value = task.getDescription();
+      priorityInput.value = task.getPriority();
+      notesInput.value = task.getNotes();
+      dueDateInput.value = task.getDueDate();
+    }
   };
 
   const refresh = () => {
