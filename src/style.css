@@ -174,7 +174,8 @@ main {
 }
 
 .task-title-group {
-  display: flex;
+  display: grid;
+  grid-template-columns: max-content 1fr;
   margin-left: -2.5rem;
 }
 

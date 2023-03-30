@@ -93,13 +93,17 @@ const tasksDOM = (() => {
 
     const taskTitle = document.createElement('span');
     taskTitle.classList.add('task-title');
+    taskTitle.setAttribute('contentEditable', true);
     taskTitle.innerText = task.getTitle();
+    taskTitle.addEventListener('input', () => task.setTitle(taskTitle.innerText));
     taskTitleGroup.appendChild(taskTitle);
 
     if (task.getDescription()) {
       const description = document.createElement('span');
       description.classList.add('description');
+      description.setAttribute('contentEditable', true);
       description.innerText = task.getDescription();
+      description.addEventListener('input', () => task.setDescription(description.innerText));
       taskInfo.appendChild(description);
     }
 
@@ -158,7 +162,7 @@ const tasksDOM = (() => {
     // });
 
     taskList.appendChild(listItem);
-    taskInfo.addEventListener('click', (event) => setActiveTask(listItem));
+    // taskInfo.addEventListener('click', (event) => setActiveTask(listItem));
   };
 
   const handleClick = () => {
