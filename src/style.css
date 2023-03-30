@@ -316,13 +316,12 @@ main {
 
 .form-content .button-group {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  width: max-content;
+  grid-template-columns: 1fr auto auto;
   gap: 8px;
-  justify-self: right;
 }
 .form-content button {
   padding: 0.5rem 1rem;
+  width: 105px;
   border: none;
   background-color: transparent;
   font-size: 1rem;
@@ -334,10 +333,20 @@ main {
 .form-content .cancel-btn {
   border: 1px solid var(--color-active);
   background-color: white;
+  justify-self: right;
 }
 .form-content .submit-btn {
   background-color: var(--color-primary);
   color: white;
+}
+.form-content .delete-btn {
+  display: none;
+  background-color: rgba(211, 43, 43, 0.841);
+  color: white;
+  justify-self: left;
+}
+.add-task-form.edit-task .form-content .delete-btn {
+  display: initial;
 }
 
 /* ---FOOTER--- */

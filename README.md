@@ -32,6 +32,7 @@
 - [x] Revise how task details are displayed
 - [x] Task notes
   - [ ] Make task notes editable
+- [ ] Make tasks deletable
 - [ ] Refactor JS to use inheritance where possible. There's a lot of redundant code right now.
 - [ ] Subtasks within a task
 - [ ] Task groups within a project

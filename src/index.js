@@ -5,11 +5,13 @@ import Task from './task';
 
 // Dummy projects and tasks for debugging
 const project1 = Project('Project A');
-project1.addTask(Task('Task a', 'simple task', 'very-high', '01-02-03', 'notes, notes, notes...'));
+project1.addTask(
+  Task('Task a', 'simple task', 'very-high', '2023-03-29', 'notes, notes, notes...'),
+);
 project1.addTask(Task('Task b'));
-project1.addTask(Task('Task c', 'simple task', 'high', '01-02-03'));
+project1.addTask(Task('Task c', 'simple task', 'high', '2023-03-03'));
 const project2 = Project('Project B');
-project2.addTask(Task('Task d', 'urgent task', 'very-high', '11-22-33'));
+project2.addTask(Task('Task d', 'urgent task', 'very-high', '2023-03-30'));
 const project3 = Project('Project C');
 project3.addTask(Task('Task e'));
 project3.addTask(Task('Task f'));
@@ -40,6 +42,7 @@ const tasksDOM = (() => {
   };
 
   const clearForm = () => {
+    addTaskForm.setAttribute('data-task-index', '');
     titleInput.value = '';
     descriptionInput.value = '';
     priorityInput.value = '';
@@ -47,7 +50,7 @@ const tasksDOM = (() => {
     dueDateInput.value = '';
     setInteraction(priorityInput);
     setInteraction(dueDateInput);
-    addTaskForm.classList.remove('visible');
+    addTaskForm.classList.remove('visible', 'edit-task');
   };
 
   const setActiveTask = (taskNode) => {
@@ -176,6 +179,10 @@ const tasksDOM = (() => {
 
   const handleClick = () => {
     if (titleInput.value === '') return;
+
+    // ******UPDATE TO HANDLE TASK EDITS*******
+    if (addTaskForm.classList.contains('edit-task')) return;
+
     const task = Task(
       titleInput.value,
       descriptionInput.value,
@@ -191,11 +198,16 @@ const tasksDOM = (() => {
   const displayAddForm = (task) => {
     addTaskForm.classList.add('visible');
     if (task) {
+      const index = Array.prototype.indexOf.call(activeProject.getTasks(), task);
+      addTaskForm.setAttribute('data-task-index', index);
+      addTaskForm.classList.add('visible', 'edit-task');
       titleInput.value = task.getTitle();
       descriptionInput.value = task.getDescription();
       priorityInput.value = task.getPriority();
       notesInput.value = task.getNotes();
       dueDateInput.value = task.getDueDate();
+      if (task.getPriority()) setInteraction(priorityInput);
+      if (task.getDueDate()) setInteraction(dueDateInput);
     }
   };
 
