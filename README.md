@@ -33,6 +33,9 @@
 - [x] Task notes
   - [ ] Make task notes editable
 - [ ] Make tasks deletable
+- [ ] Format dates format and styles
+- [ ] Format priority styles
+
 - [ ] Refactor JS to use inheritance where possible. There's a lot of redundant code right now.
 - [ ] Subtasks within a task
 - [ ] Task groups within a project
