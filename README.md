@@ -33,8 +33,12 @@
 - [x] Task notes
 - [x] Make tasks editable
 - [x] Make tasks deletable
-- [ ] Format dates format and styles
+- [ ] Format dates
+  - [x] Update text
+  - [ ] Update styles
 - [ ] Format priority styles
+  - [x] Update text
+  - [ ] Update styles
 
 - [ ] Refactor JS to use inheritance where possible. There's a lot of redundant code right now.
 - [ ] Subtasks within a task

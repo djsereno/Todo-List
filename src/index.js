@@ -2,16 +2,17 @@ import './normalize.css';
 import './style.css';
 import Project from './project';
 import Task from './task';
+import formatDate from './formatDate';
 
 // Dummy projects and tasks for debugging
 const project1 = Project('Project A');
 project1.addTask(
-  Task('Task a', 'simple task', 'very-high', '2023-03-29', 'notes, notes, notes...'),
+  Task('Task a', 'simple task', 'Very High', '2023-03-29', 'notes, notes, notes...'),
 );
 project1.addTask(Task('Task b'));
-project1.addTask(Task('Task c', 'simple task', 'high', '2023-03-03'));
+project1.addTask(Task('Task c', 'simple task', 'High', '2023-03-03'));
 const project2 = Project('Project B');
-project2.addTask(Task('Task d', 'urgent task', 'very-high', '2023-03-30'));
+project2.addTask(Task('Task d', 'urgent task', 'Very High', '2023-03-30'));
 const project3 = Project('Project C');
 project3.addTask(Task('Task e'));
 project3.addTask(Task('Task f'));
@@ -126,7 +127,7 @@ const tasksDOM = (() => {
       taskInfo.appendChild(description);
     }
 
-    if (task.getDueDate() || task.getPriority() !== 'normal') {
+    if (task.getDueDate() || task.getPriority() !== 'Normal') {
       const tagsGroup = document.createElement('div');
       tagsGroup.classList.add('tags-group');
       taskInfo.appendChild(tagsGroup);
@@ -136,21 +137,21 @@ const tasksDOM = (() => {
         const symbol = document.createElement('i');
         symbol.classList.add('fa-solid', 'fa-calendar-days');
         dueDate.appendChild(symbol);
-        const text = document.createElement('span');
-        text.innerText = `\u00A0\u00A0${task.getDueDate()}`;
-        dueDate.appendChild(text);
+        const textNode = document.createElement('span');
+        textNode.innerText = `\u00A0\u00A0${formatDate(task.getDueDate())}`;
+        dueDate.appendChild(textNode);
         dueDate.classList.add('tag', 'due-date');
         tagsGroup.appendChild(dueDate);
       }
 
-      if (task.getPriority() !== 'normal') {
+      if (task.getPriority() !== 'Normal') {
         const priority = document.createElement('span');
         const symbol = document.createElement('i');
         symbol.classList.add('fa-solid', 'fa-flag');
         priority.appendChild(symbol);
-        const text = document.createElement('span');
-        text.innerText = `\u00A0\u00A0${task.getPriority()}`;
-        priority.appendChild(text);
+        const textNode = document.createElement('span');
+        textNode.innerText = `\u00A0\u00A0${task.getPriority()}`;
+        priority.appendChild(textNode);
         priority.classList.add('tag', 'priority');
         tagsGroup.appendChild(priority);
       }

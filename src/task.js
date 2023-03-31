@@ -1,7 +1,7 @@
 const Task = (title, description, priority, dueDate, notes) => {
   let _title = title;
   let _description = description || null;
-  let _priority = priority || 'normal';
+  let _priority = priority || 'Normal';
   let _dueDate = dueDate || null;
   let _notes = notes || null;
   let _completion = false;
