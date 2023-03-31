@@ -34,7 +34,7 @@
 - [x] Make tasks editable
 - [x] Format dates
 - [x] Format priority styles
-- [ ] Fix bug with checkboxes
+- [x] Fix bug with checkboxes
 - [ ] Make tasks deletable
 - [ ] Make project names editable
 - [ ] Make projects deletable

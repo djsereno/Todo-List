@@ -75,18 +75,9 @@ const tasksDOM = (() => {
     const listItem = document.createElement('li');
     listItem.classList.add('task');
 
-    const taskInfo = document.createElement('div');
-    taskInfo.classList.add('task-info');
-    taskInfo.addEventListener('click', () => displayAddForm(task));
-    listItem.appendChild(taskInfo);
-
-    const taskTitleGroup = document.createElement('div');
-    taskTitleGroup.classList.add('task-title-group');
-    taskInfo.appendChild(taskTitleGroup);
-
     const checkboxContainer = document.createElement('div');
     checkboxContainer.classList.add('checkbox-container');
-    taskTitleGroup.appendChild(checkboxContainer);
+    listItem.appendChild(checkboxContainer);
 
     const checkbox = document.createElement('label');
     checkbox.classList.add('checkbox');
@@ -106,25 +97,20 @@ const tasksDOM = (() => {
     checkmarkSymbol.classList.add('fa-solid', 'fa-check');
     checkmark.appendChild(checkmarkSymbol);
 
+    const taskInfo = document.createElement('div');
+    taskInfo.classList.add('task-info');
+    taskInfo.addEventListener('click', () => displayAddForm(task));
+    listItem.appendChild(taskInfo);
+
     const taskTitle = document.createElement('span');
     taskTitle.classList.add('task-title');
     taskTitle.innerText = task.getTitle();
-    taskTitle.addEventListener('input', () => task.setTitle(taskTitle.innerText));
-    taskTitleGroup.appendChild(taskTitle);
-
-    const editSymbol = document.createElement('i');
-    editSymbol.classList.add('fa-regular', 'fa-pen-to-square', 'edit');
-    taskTitleGroup.appendChild(editSymbol);
-
-    const trashSymbol = document.createElement('i');
-    trashSymbol.classList.add('fa-regular', 'fa-trash-can', 'delete');
-    taskTitleGroup.appendChild(trashSymbol);
+    taskInfo.appendChild(taskTitle);
 
     if (task.getDescription()) {
       const description = document.createElement('span');
       description.classList.add('description');
       description.innerText = task.getDescription();
-      description.addEventListener('input', () => task.setDescription(description.innerText));
       taskInfo.appendChild(description);
     }
 
@@ -166,21 +152,14 @@ const tasksDOM = (() => {
       }
     }
 
-    if (task.getNotes()) {
-      const fineDetails = document.createElement('span');
-      fineDetails.classList.add('fine-details');
+    const editSymbol = document.createElement('i');
+    editSymbol.classList.add('fa-regular', 'fa-pen-to-square', 'edit');
+    listItem.appendChild(editSymbol);
+    editSymbol.addEventListener('click', () => displayAddForm(task));
 
-      const label = document.createElement('label');
-      label.innerText = 'Notes:';
-      fineDetails.appendChild(label);
-
-      const notesText = document.createElement('div');
-      notesText.classList.add('notes');
-      notesText.innerText = task.getNotes();
-      fineDetails.appendChild(notesText);
-
-      listItem.appendChild(fineDetails);
-    }
+    const trashSymbol = document.createElement('i');
+    trashSymbol.classList.add('fa-regular', 'fa-trash-can', 'delete');
+    listItem.appendChild(trashSymbol);
 
     nodeToReplace ? taskList.replaceChild(listItem, nodeToReplace) : taskList.appendChild(listItem);
   };
