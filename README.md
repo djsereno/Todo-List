@@ -31,8 +31,8 @@
 - [x] Store task completion state
 - [x] Revise how task details are displayed
 - [x] Task notes
-  - [ ] Make task notes editable
-- [ ] Make tasks deletable
+- [x] Make tasks editable
+- [x] Make tasks deletable
 - [ ] Format dates format and styles
 - [ ] Format priority styles
 

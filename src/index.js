@@ -53,14 +53,23 @@ const tasksDOM = (() => {
     addTaskForm.classList.remove('visible', 'edit-task');
   };
 
-  const setActiveTask = (taskNode) => {
-    const currentActiveNode = taskList.querySelector('.active');
-    if (currentActiveNode) currentActiveNode.classList.remove('active');
-    if (currentActiveNode === taskNode) return;
-    taskNode.classList.add('active');
+  const displayAddForm = (task) => {
+    addTaskForm.classList.add('visible');
+    if (task) {
+      const index = Array.prototype.indexOf.call(activeProject.getTasks(), task);
+      addTaskForm.setAttribute('data-task-index', index);
+      addTaskForm.classList.add('visible', 'edit-task');
+      titleInput.value = task.getTitle();
+      descriptionInput.value = task.getDescription();
+      priorityInput.value = task.getPriority();
+      notesInput.value = task.getNotes();
+      dueDateInput.value = task.getDueDate();
+      if (task.getPriority()) setInteraction(priorityInput);
+      if (task.getDueDate()) setInteraction(dueDateInput);
+    }
   };
 
-  const addTaskNode = (task) => {
+  const addTaskNode = (task, nodeToReplace) => {
     const listItem = document.createElement('li');
     listItem.classList.add('task');
 
@@ -97,7 +106,6 @@ const tasksDOM = (() => {
 
     const taskTitle = document.createElement('span');
     taskTitle.classList.add('task-title');
-    // taskTitle.setAttribute('contentEditable', true);
     taskTitle.innerText = task.getTitle();
     taskTitle.addEventListener('input', () => task.setTitle(taskTitle.innerText));
     taskTitleGroup.appendChild(taskTitle);
@@ -113,7 +121,6 @@ const tasksDOM = (() => {
     if (task.getDescription()) {
       const description = document.createElement('span');
       description.classList.add('description');
-      // description.setAttribute('contentEditable', true);
       description.innerText = task.getDescription();
       description.addEventListener('input', () => task.setDescription(description.innerText));
       taskInfo.appendChild(description);
@@ -164,51 +171,39 @@ const tasksDOM = (() => {
 
       listItem.appendChild(fineDetails);
     }
-    // const taskDetails = task.getDetails();
-    // Object.keys(taskDetails).forEach((key) => {
-    //   if (key === 'title' || taskDetails[key] === null) return;
-    //   const detailItem = document.createElement('li');
-    //   detailItem.innerText = `${key}: ${taskDetails[key]}`;
-    //   detailItem.classList.add('task-detail', key);
-    //   fineDetails.appendChild(detailItem);
-    // });
 
-    taskList.appendChild(listItem);
-    // taskInfo.addEventListener('click', (event) => setActiveTask(listItem));
+    nodeToReplace ? taskList.replaceChild(listItem, nodeToReplace) : taskList.appendChild(listItem);
   };
 
-  const handleClick = () => {
+  const updateTask = (task) => {
+    task.setTitle(titleInput.value);
+    task.setDescription(descriptionInput.value);
+    task.setPriority(priorityInput.value);
+    task.setDueDate(dueDateInput.value);
+    task.setNotes(notesInput.value);
+  };
+
+  const saveTask = () => {
     if (titleInput.value === '') return;
 
-    // ******UPDATE TO HANDLE TASK EDITS*******
-    if (addTaskForm.classList.contains('edit-task')) return;
-
-    const task = Task(
-      titleInput.value,
-      descriptionInput.value,
-      priorityInput.value,
-      dueDateInput.value,
-      notesInput.value,
-    );
-    addTaskNode(task);
-    activeProject.addTask(task);
-    clearForm();
-  };
-
-  const displayAddForm = (task) => {
-    addTaskForm.classList.add('visible');
-    if (task) {
-      const index = Array.prototype.indexOf.call(activeProject.getTasks(), task);
-      addTaskForm.setAttribute('data-task-index', index);
-      addTaskForm.classList.add('visible', 'edit-task');
-      titleInput.value = task.getTitle();
-      descriptionInput.value = task.getDescription();
-      priorityInput.value = task.getPriority();
-      notesInput.value = task.getNotes();
-      dueDateInput.value = task.getDueDate();
-      if (task.getPriority()) setInteraction(priorityInput);
-      if (task.getDueDate()) setInteraction(dueDateInput);
+    if (addTaskForm.classList.contains('edit-task')) {
+      const index = addTaskForm.getAttribute('data-task-index');
+      const task = activeProject.getTasks()[index];
+      const nodeToReplace = taskList.children.item(index);
+      updateTask(task);
+      addTaskNode(task, nodeToReplace);
+    } else {
+      const task = Task(
+        titleInput.value,
+        descriptionInput.value,
+        priorityInput.value,
+        dueDateInput.value,
+        notesInput.value,
+      );
+      activeProject.addTask(task);
+      addTaskNode(task);
     }
+    clearForm();
   };
 
   const refresh = () => {
@@ -219,7 +214,7 @@ const tasksDOM = (() => {
   };
 
   showFormButton.addEventListener('click', () => displayAddForm());
-  addButton.addEventListener('click', () => handleClick());
+  addButton.addEventListener('click', () => saveTask());
   cancelButton.addEventListener('click', () => clearForm());
   dueDateInput.addEventListener('change', () => setInteraction(dueDateInput));
   priorityInput.addEventListener('change', () => setInteraction(priorityInput));
@@ -264,7 +259,7 @@ const projectsDOM = (() => {
     button.addEventListener('click', (event) => setActiveProject(event.currentTarget));
   };
 
-  const handleClick = () => {
+  const saveProject = () => {
     if (titleInput.value === '') return;
     addProjectNode(titleInput.value);
     const newProject = Project(titleInput.value);
@@ -281,7 +276,7 @@ const projectsDOM = (() => {
   };
 
   showFormButton.addEventListener('click', () => displayAddForm());
-  addButton.addEventListener('click', () => handleClick());
+  addButton.addEventListener('click', () => saveProject());
   cancelButton.addEventListener('click', () => clearForm());
   refresh();
 
