@@ -218,6 +218,32 @@ main {
   background-color: var(--color-active);
   font-size: 0.9rem;
 }
+.tag.due-date {
+  background-color: #cce5ff;
+  color: #004085;
+}
+.tag.due-date.today,
+.tag.due-date.tomorrow {
+  background-color: #fff3cd;
+  color: #85643c;
+}
+.tag.due-date.overdue {
+  background-color: #f8d7da;
+  color: #a83324;
+}
+
+.tag.priority.low {
+  background-color: #d4edda;
+  color: #1a5751;
+}
+.tag.priority.high {
+  background-color: #fff3cd;
+  color: #85643c;
+}
+.tag.priority.very-high {
+  background-color: #f8d7da;
+  color: #a83324;
+}
 
 .fine-details {
   display: none;

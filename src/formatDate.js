@@ -1,7 +1,6 @@
-import { parse, format, isToday, isTomorrow, isYesterday } from 'date-fns';
+import { format, isToday, isTomorrow, isYesterday } from 'date-fns';
 
-const formatDate = (dateString) => {
-  const date = parse(dateString, 'yyyy-MM-dd', new Date());
+const formatDate = (date) => {
   let newDateString;
 
   if (isToday(date)) {

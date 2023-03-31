@@ -1,3 +1,4 @@
+import { parse, startOfToday } from 'date-fns';
 import './normalize.css';
 import './style.css';
 import Project from './project';
@@ -10,12 +11,12 @@ project1.addTask(
   Task('Task a', 'simple task', 'Very High', '2023-03-29', 'notes, notes, notes...'),
 );
 project1.addTask(Task('Task b'));
-project1.addTask(Task('Task c', 'simple task', 'High', '2023-03-03'));
+project1.addTask(Task('Task c', 'simple task', 'High', '2023-03-31'));
 const project2 = Project('Project B');
 project2.addTask(Task('Task d', 'urgent task', 'Very High', '2023-03-30'));
 const project3 = Project('Project C');
 project3.addTask(Task('Task e'));
-project3.addTask(Task('Task f'));
+project3.addTask(Task('Task f', '', 'Low'));
 const projects = [project1, project2, project3];
 let activeProject = project1;
 
@@ -134,14 +135,21 @@ const tasksDOM = (() => {
 
       if (task.getDueDate()) {
         const dueDate = document.createElement('span');
+        dueDate.classList.add('tag', 'due-date');
+        tagsGroup.appendChild(dueDate);
+
         const symbol = document.createElement('i');
         symbol.classList.add('fa-solid', 'fa-calendar-days');
         dueDate.appendChild(symbol);
+
         const textNode = document.createElement('span');
-        textNode.innerText = `\u00A0\u00A0${formatDate(task.getDueDate())}`;
+        const date = parse(task.getDueDate(), 'yyyy-MM-dd', new Date());
+        const dateText = formatDate(date);
+        if (date < startOfToday()) dueDate.classList.add('overdue');
+        if (dateText === 'Today' || dateText === 'Tomorrow')
+          dueDate.classList.add(dateText.toLowerCase());
+        textNode.innerText = `\u00A0\u00A0${dateText}`;
         dueDate.appendChild(textNode);
-        dueDate.classList.add('tag', 'due-date');
-        tagsGroup.appendChild(dueDate);
       }
 
       if (task.getPriority() !== 'Normal') {
@@ -150,9 +158,10 @@ const tasksDOM = (() => {
         symbol.classList.add('fa-solid', 'fa-flag');
         priority.appendChild(symbol);
         const textNode = document.createElement('span');
-        textNode.innerText = `\u00A0\u00A0${task.getPriority()}`;
+        const priorityText = task.getPriority();
+        textNode.innerText = `\u00A0\u00A0${priorityText}`;
         priority.appendChild(textNode);
-        priority.classList.add('tag', 'priority');
+        priority.classList.add('tag', 'priority', priorityText.replace(' ', '-').toLowerCase());
         tagsGroup.appendChild(priority);
       }
     }

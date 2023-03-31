@@ -32,13 +32,12 @@
 - [x] Revise how task details are displayed
 - [x] Task notes
 - [x] Make tasks editable
-- [x] Make tasks deletable
-- [ ] Format dates
-  - [x] Update text
-  - [ ] Update styles
-- [ ] Format priority styles
-  - [x] Update text
-  - [ ] Update styles
+- [x] Format dates
+- [x] Format priority styles
+- [ ] Fix bug with checkboxes
+- [ ] Make tasks deletable
+- [ ] Make project names editable
+- [ ] Make projects deletable
 
 - [ ] Refactor JS to use inheritance where possible. There's a lot of redundant code right now.
 - [ ] Subtasks within a task
