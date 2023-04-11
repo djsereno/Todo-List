@@ -186,7 +186,13 @@ main {
   color: grey;
 }
 
-/* ---TAGS--- */
+.task:has(.checkbox input:checked) {
+  background-color: var(--color-sidebar);
+}
+.task:has(.checkbox input:checked) .task-title,
+.task:has(.checkbox input:checked) .description {
+  text-decoration: line-through;
+}
 
 .tags-group {
   display: flex;
@@ -225,11 +231,15 @@ main {
   background-color: #f8d7da;
   color: #a83324;
 }
+.task:has(.checkbox input:checked) .tag {
+  background-color: var(--color-active);
+  color: var(--color-dark);
+}
 
 .task > i {
   display: flex;
   align-items: center;
-  height: 1.5rem;
+  height: 1rem;
   padding-left: 0.5rem;
   transform: scale(0);
   transition: transform 0.1s;

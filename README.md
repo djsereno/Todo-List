@@ -35,7 +35,7 @@
 - [x] Format dates
 - [x] Format priority styles
 - [x] Fix bug with checkboxes
-- [ ] Update styles for tags once task is marked complete
+- [x] Update styles for tags once task is marked complete
 - [ ] Make tasks deletable
 - [ ] Make project names editable
 - [ ] Make projects deletable
