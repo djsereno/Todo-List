@@ -17,7 +17,7 @@ const task1 = Task(
 const task2 = Task(
   'Design the user interface',
   'Create a visually appealing and user-friendly interface for the application',
-  'Low',
+  'Normal',
   '2023-05-01',
   'Consider the target audience and their needs, and use modern design principles to create a consistent and intuitive layout.',
 );
