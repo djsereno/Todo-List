@@ -37,10 +37,13 @@
 - [x] Fix bug with checkboxes
 - [x] Update styles for tags once task is marked complete
 - [ ] Make tasks deletable
+  - [x] Deletable from trash can click
+  - [ ] Deletable from edit task form
 - [ ] Make project names editable
 - [ ] Make projects deletable
 
 - [ ] Refactor JS to use inheritance where possible. There's a lot of redundant code right now.
+- [ ] Implement task drag-and-drop reorder
 - [ ] Subtasks within a task
 - [ ] Task groups within a project
 - [ ] Project groups

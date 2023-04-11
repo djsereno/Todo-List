@@ -8,6 +8,8 @@ module.exports = {
   entry: {
     index: './src/index.js',
     task: './src/task.js',
+    project: './src/project.js',
+    sample: './src/sample.js'
   },
   plugins: [
     new HtmlWebpackPlugin({

@@ -17,6 +17,9 @@ const Project = (title) => {
   const addTask = (newTask) => {
     _tasks.push(newTask);
   };
+  const deleteTaskAtIndex = (index) => {
+    _tasks.splice(index, 1);
+  };
 
   return {
     getTitle,
@@ -26,6 +29,7 @@ const Project = (title) => {
     setTitle,
     setDescription,
     addTask,
+    deleteTaskAtIndex,
   };
 };
 
