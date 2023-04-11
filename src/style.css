@@ -8,6 +8,7 @@
   --color-secondary: #fa9f42;
   --header-height: 75px;
   --checkbox-size: 1.3rem;
+  --std-transition: all 0.1s ease;
 }
 
 * {
@@ -166,6 +167,11 @@ main {
   grid-template-columns: auto 1fr auto auto;
   padding: 0.8rem 0;
   background-color: white;
+  transition: var(--std-transition);
+}
+.task:has(.checkbox input:checked) {
+  background-color: var(--color-sidebar);
+  transition: var(--std-transition);
 }
 
 .task-info {
@@ -178,7 +184,6 @@ main {
 .task-title {
   display: flex;
   align-items: center;
-  /* height: var(--checkbox-size); */
 }
 
 .description {
@@ -186,9 +191,6 @@ main {
   color: grey;
 }
 
-.task:has(.checkbox input:checked) {
-  background-color: var(--color-sidebar);
-}
 .task:has(.checkbox input:checked) .task-title,
 .task:has(.checkbox input:checked) .description {
   text-decoration: line-through;
@@ -204,7 +206,14 @@ main {
   border-radius: 5px;
   background-color: var(--color-active);
   font-size: 0.8rem;
+  transition: var(--std-transition);
 }
+.task:has(.checkbox input:checked) .tag {
+  background-color: var(--color-active);
+  color: var(--color-dark);
+  transition: var(--std-transition);
+}
+
 .tag.due-date {
   background-color: #cce5ff;
   color: #004085;
@@ -230,10 +239,6 @@ main {
 .tag.priority.very-high {
   background-color: #f8d7da;
   color: #a83324;
-}
-.task:has(.checkbox input:checked) .tag {
-  background-color: var(--color-active);
-  color: var(--color-dark);
 }
 
 .task > i {
@@ -401,7 +406,7 @@ footer {
   border: 1px solid var(--color-active);
   border-radius: 50%;
   background-color: white;
-  transition: all 0.1s ease;
+  transition: var(--std-transition);
   place-items: center;
   cursor: pointer;
 }
