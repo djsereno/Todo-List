@@ -232,6 +232,7 @@ const projectsDOM = (() => {
   const titleInput = addProjectForm.querySelector('.title-input');
   const addButton = addProjectForm.querySelector('.submit-btn');
   const cancelButton = addProjectForm.querySelector('.cancel-btn');
+  const deleteButton = addProjectForm.querySelector('.delete-btn');
 
   const setActiveProject = (projectNode) => {
     const currentActiveNode = projectList.querySelector('.active');
@@ -270,9 +271,11 @@ const projectsDOM = (() => {
       index = addProjectForm.getAttribute('data-project-index');
       clearForm();
     }
+
+    const isActive = projects[index] === activeProject;
     projectList.removeChild(projectList.children[index]);
     projects.splice(index, 1);
-    if (project === activeProject) setActiveProject(projectList.firstChild);
+    if (isActive) setActiveProject(projectList.firstChild);
   };
 
   const addProjectNode = (project) => {
@@ -328,6 +331,7 @@ const projectsDOM = (() => {
   showFormButton.addEventListener('click', () => displayAddForm());
   addButton.addEventListener('click', () => saveProject());
   cancelButton.addEventListener('click', () => clearForm());
+  deleteButton.addEventListener('click', () => deleteProject());
   refresh();
 
   return { refresh };

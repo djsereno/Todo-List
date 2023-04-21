@@ -38,9 +38,7 @@
 - [x] Update styles for tags once task is marked complete
 - [x] Make tasks deletable
 - [x] Make project names editable
-- [ ] Make projects deletable
-  - [x] Make projects deletable from trash can click
-  - [ ] Make projects deletable from form
+- [x] Make projects deletable
 - [ ] Footer
 - [ ] Refactor JS to use inheritance where possible. There's a lot of redundant code right now.
 
