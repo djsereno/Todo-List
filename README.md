@@ -39,6 +39,8 @@
 - [x] Make tasks deletable
 - [x] Make project names editable
 - [ ] Make projects deletable
+  - [x] Make projects deletable from trash can click
+  - [ ] Make projects deletable from form
 - [ ] Footer
 - [ ] Refactor JS to use inheritance where possible. There's a lot of redundant code right now.
 

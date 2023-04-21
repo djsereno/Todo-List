@@ -249,13 +249,30 @@ const projectsDOM = (() => {
       addProjectForm.setAttribute('data-project-index', index);
       addProjectForm.classList.add('edit-project');
       titleInput.value = project.getTitle();
+      if (projects.length > 1) addProjectForm.classList.add('deletable');
     }
   };
 
   const clearForm = () => {
     addProjectForm.setAttribute('data-project-index', '');
     titleInput.value = '';
-    addProjectForm.classList.remove('visible', 'edit-project');
+    addProjectForm.classList.remove('visible', 'edit-project', 'deletable');
+  };
+
+  const deleteProject = (project) => {
+    if (!project && !addProjectForm.classList.contains('edit-project')) return;
+    if (projects.length === 1) return;
+
+    let index;
+    if (project) {
+      index = Array.prototype.indexOf.call(projects, project);
+    } else {
+      index = addProjectForm.getAttribute('data-project-index');
+      clearForm();
+    }
+    projectList.removeChild(projectList.children[index]);
+    projects.splice(index, 1);
+    if (project === activeProject) setActiveProject(projectList.firstChild);
   };
 
   const addProjectNode = (project) => {
@@ -277,7 +294,7 @@ const projectsDOM = (() => {
 
     const trashSymbol = document.createElement('i');
     trashSymbol.classList.add('fa-regular', 'fa-trash-can', 'delete');
-    // trashSymbol.addEventListener('click', () => deleteTask(task));
+    trashSymbol.addEventListener('click', () => deleteProject(project));
     listItem.appendChild(trashSymbol);
 
     projectList.appendChild(listItem);
