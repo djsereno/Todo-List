@@ -90,17 +90,24 @@ header {
   gap: 0.2rem;
 }
 
-.projects-list .project-title {
-  height: 1.8rem;
-  border: none;
-  background-color: var(--color-sidebar);
-  text-align: left;
+.project {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  padding: .4rem;
+  transition: var(--std-transition);
+}
+
+.project .project-title {
+  display: flex;
+  align-items: center;
+  margin: 0;
   color: inherit;
   transition: background-color 0.3s ease;
   cursor: pointer;
 }
 
-.projects-list .project-title.active {
+.projects-list .project.active {
   border-radius: 5px;
   background-color: var(--color-active);
   font-weight: 500;
@@ -241,7 +248,10 @@ main {
   color: #a83324;
 }
 
-.task > i {
+/* ---EDIT & DELETE ICONS--- */
+
+.task > i,
+.project > i {
   display: flex;
   align-items: center;
   height: 1rem;
@@ -250,14 +260,17 @@ main {
   transition: transform 0.1s;
   cursor: pointer;
 }
-.task:hover > i {
+.task:hover > i,
+.project:hover > i {
   transform: scale(1);
   transition: transform 0.1s;
 }
-.task > .edit:hover {
+.task > .edit:hover,
+.project > .edit:hover {
   filter: brightness(2);
 }
-.task > .delete:hover {
+.task > .delete:hover,
+.project > .delete:hover {
   color: firebrick;
 }
 

@@ -238,11 +238,26 @@ const projectsDOM = (() => {
   };
 
   const addProjectNode = (projectTitle) => {
-    const button = document.createElement('button');
-    button.innerText = projectTitle;
-    button.classList.add('project-title');
-    projectList.appendChild(button);
-    button.addEventListener('click', (event) => setActiveProject(event.currentTarget));
+    const listItem = document.createElement('li');
+    listItem.classList.add('project');
+
+    const projectName = document.createElement('span');
+    projectName.innerText = projectTitle;
+    projectName.classList.add('project-title');
+    listItem.appendChild(projectName);
+
+    projectList.appendChild(listItem);
+    listItem.addEventListener('click', (event) => setActiveProject(event.currentTarget));
+
+    const editSymbol = document.createElement('i');
+    editSymbol.classList.add('fa-regular', 'fa-pen-to-square', 'edit');
+    listItem.appendChild(editSymbol);
+    // editSymbol.addEventListener('click', () => displayAddForm(task));
+
+    const trashSymbol = document.createElement('i');
+    trashSymbol.classList.add('fa-regular', 'fa-trash-can', 'delete');
+    // trashSymbol.addEventListener('click', () => deleteTaskNode(task));
+    listItem.appendChild(trashSymbol);
   };
 
   const saveProject = () => {
