@@ -37,7 +37,7 @@
 - [x] Fix bug with checkboxes
 - [x] Update styles for tags once task is marked complete
 - [x] Make tasks deletable
-- [ ] Make project names editable
+- [x] Make project names editable
 - [ ] Make projects deletable
 - [ ] Footer
 - [ ] Refactor JS to use inheritance where possible. There's a lot of redundant code right now.

@@ -94,7 +94,7 @@ header {
   display: grid;
   grid-template-columns: 1fr auto auto;
   align-items: center;
-  padding: .4rem;
+  padding: 0.4rem;
   transition: var(--std-transition);
 }
 
@@ -307,7 +307,7 @@ main {
 }
 
 .form-content .title-input {
-  /* width: 100%; */
+  min-width: 500px;
   padding: 0.5rem 1rem;
   border: 1px solid var(--color-active);
   font-size: 1.5rem;
@@ -376,7 +376,8 @@ main {
   background-color: rgba(211, 43, 43, 0.841);
   color: white;
 }
-.add-task-form.edit-task .form-content .delete-btn {
+.add-task-form.edit-task .form-content .delete-btn,
+.add-project-form.edit-project .form-content .delete-btn {
   display: initial;
 }
 
