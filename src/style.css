@@ -274,7 +274,7 @@ main {
   color: firebrick;
 }
 
-/* ---ADD TASK FORM--- */
+/* ---TASK & PROJECT FORMS--- */
 .add-task-form,
 .add-project-form {
   display: none;
@@ -307,7 +307,7 @@ main {
 }
 
 .form-content .title-input {
-  width: 100%;
+  /* width: 100%; */
   padding: 0.5rem 1rem;
   border: 1px solid var(--color-active);
   font-size: 1.5rem;
@@ -351,7 +351,7 @@ main {
   gap: 8px;
 }
 .form-content button {
-  width: 105px;
+  width: 125px;
   padding: 0.5rem 1rem;
   border: none;
   background-color: transparent;
