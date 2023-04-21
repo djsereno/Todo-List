@@ -34,6 +34,10 @@ const tasksDOM = (() => {
     }
   };
 
+  const setProjectHeading = (newHeadingText) => {
+    projectHeading.innerText = newHeadingText;
+  };
+
   const clearForm = () => {
     addTaskForm.setAttribute('data-task-index', '');
     titleInput.value = '';
@@ -202,7 +206,7 @@ const tasksDOM = (() => {
   };
 
   const refresh = () => {
-    projectHeading.innerText = activeProject.getTitle();
+    setProjectHeading(activeProject.getTitle());
     taskList.innerHTML = '';
     const tasks = activeProject.getTasks();
     tasks.forEach((task) => addTaskNode(task));
@@ -216,7 +220,7 @@ const tasksDOM = (() => {
   priorityInput.addEventListener('change', () => setInteraction(priorityInput));
   refresh();
 
-  return { refresh };
+  return { refresh, setProjectHeading };
 })();
 
 const projectsDOM = (() => {
@@ -284,9 +288,11 @@ const projectsDOM = (() => {
 
     if (addProjectForm.classList.contains('edit-project')) {
       const index = addProjectForm.getAttribute('data-project-index');
-      projects[index].setTitle(titleInput.value);
+      const newTitle = titleInput.value;
+      projects[index].setTitle(newTitle);
       const projectNode = projectList.children.item(index);
-      projectNode.firstChild.innerText = titleInput.value;
+      projectNode.firstChild.innerText = newTitle;
+      if (projectNode.classList.contains('active')) tasksDOM.setProjectHeading(newTitle);
     } else {
       const newProject = Project(titleInput.value);
       addProjectNode(newProject);
