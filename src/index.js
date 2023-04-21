@@ -24,6 +24,7 @@ const tasksDOM = (() => {
   const notesInput = addTaskForm.querySelector('.notes-input');
   const addButton = addTaskForm.querySelector('.submit-btn');
   const cancelButton = addTaskForm.querySelector('.cancel-btn');
+  const deleteButton = addTaskForm.querySelector('.delete-btn');
 
   const setInteraction = (input) => {
     if (input.value !== '') {
@@ -61,10 +62,22 @@ const tasksDOM = (() => {
     }
   };
 
-  const deleteTaskNode = (task) => {
-    const index = Array.prototype.indexOf.call(activeProject.getTasks(), task);
-    activeProject.deleteTaskAtIndex(index);
+  const deleteTask = (task) => {
+    if (!task && !addTaskForm.classList.contains('edit-task')) return;
+
+    console.log('PREV: ', activeProject.getTaskTitles());
+
+    let index;
+    if (task) {
+      index = Array.prototype.indexOf.call(activeProject.getTasks(), task);
+    } else {
+      index = addTaskForm.getAttribute('data-task-index');
+      clearForm();
+    }
     taskList.removeChild(taskList.children[index]);
+    activeProject.deleteTaskAtIndex(index);
+
+    console.log('NEW: ', activeProject.getTaskTitles());
   };
 
   const addTaskNode = (task, nodeToReplace) => {
@@ -155,7 +168,7 @@ const tasksDOM = (() => {
 
     const trashSymbol = document.createElement('i');
     trashSymbol.classList.add('fa-regular', 'fa-trash-can', 'delete');
-    trashSymbol.addEventListener('click', () => deleteTaskNode(task));
+    trashSymbol.addEventListener('click', () => deleteTask(task));
     listItem.appendChild(trashSymbol);
 
     nodeToReplace ? taskList.replaceChild(listItem, nodeToReplace) : taskList.appendChild(listItem);
@@ -202,6 +215,7 @@ const tasksDOM = (() => {
   showFormButton.addEventListener('click', () => displayAddForm());
   addButton.addEventListener('click', () => saveTask());
   cancelButton.addEventListener('click', () => clearForm());
+  deleteButton.addEventListener('click', () => deleteTask());
   dueDateInput.addEventListener('change', () => setInteraction(dueDateInput));
   priorityInput.addEventListener('change', () => setInteraction(priorityInput));
   refresh();
@@ -256,7 +270,7 @@ const projectsDOM = (() => {
 
     const trashSymbol = document.createElement('i');
     trashSymbol.classList.add('fa-regular', 'fa-trash-can', 'delete');
-    // trashSymbol.addEventListener('click', () => deleteTaskNode(task));
+    // trashSymbol.addEventListener('click', () => deleteTask(task));
     listItem.appendChild(trashSymbol);
   };
 
