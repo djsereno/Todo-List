@@ -65,8 +65,6 @@ const tasksDOM = (() => {
   const deleteTask = (task) => {
     if (!task && !addTaskForm.classList.contains('edit-task')) return;
 
-    console.log('PREV: ', activeProject.getTaskTitles());
-
     let index;
     if (task) {
       index = Array.prototype.indexOf.call(activeProject.getTasks(), task);
@@ -76,8 +74,6 @@ const tasksDOM = (() => {
     }
     taskList.removeChild(taskList.children[index]);
     activeProject.deleteTaskAtIndex(index);
-
-    console.log('NEW: ', activeProject.getTaskTitles());
   };
 
   const addTaskNode = (task, nodeToReplace) => {
@@ -242,51 +238,67 @@ const projectsDOM = (() => {
     tasksDOM.refresh();
   };
 
-  const displayAddForm = () => {
+  const displayAddForm = (project) => {
     addProjectForm.classList.add('visible');
+    if (project) {
+      const index = Array.prototype.indexOf.call(projects, project);
+      addProjectForm.setAttribute('data-project-index', index);
+      addProjectForm.classList.add('edit-project');
+      titleInput.value = project.getTitle();
+    }
   };
 
   const clearForm = () => {
+    addProjectForm.setAttribute('data-project-index', '');
     titleInput.value = '';
-    addProjectForm.classList.remove('visible');
+    addProjectForm.classList.remove('visible', 'edit-project');
   };
 
-  const addProjectNode = (projectTitle) => {
+  const addProjectNode = (project) => {
     const listItem = document.createElement('li');
     listItem.classList.add('project');
 
     const projectName = document.createElement('span');
-    projectName.innerText = projectTitle;
+    projectName.innerText = project.getTitle();
     projectName.classList.add('project-title');
+    projectName.addEventListener('click', (event) =>
+      setActiveProject(event.currentTarget.parentNode),
+    );
     listItem.appendChild(projectName);
-
-    projectList.appendChild(listItem);
-    listItem.addEventListener('click', (event) => setActiveProject(event.currentTarget));
 
     const editSymbol = document.createElement('i');
     editSymbol.classList.add('fa-regular', 'fa-pen-to-square', 'edit');
     listItem.appendChild(editSymbol);
-    // editSymbol.addEventListener('click', () => displayAddForm(task));
+    editSymbol.addEventListener('click', () => displayAddForm(project));
 
     const trashSymbol = document.createElement('i');
     trashSymbol.classList.add('fa-regular', 'fa-trash-can', 'delete');
     // trashSymbol.addEventListener('click', () => deleteTask(task));
     listItem.appendChild(trashSymbol);
+
+    projectList.appendChild(listItem);
   };
 
   const saveProject = () => {
     if (titleInput.value === '') return;
-    addProjectNode(titleInput.value);
-    const newProject = Project(titleInput.value);
-    projects.push(newProject);
-    titleInput.value = '';
-    setActiveProject(projectList.lastChild);
+
+    if (addProjectForm.classList.contains('edit-project')) {
+      const index = addProjectForm.getAttribute('data-project-index');
+      projects[index].setTitle(titleInput.value);
+      const projectNode = projectList.children.item(index);
+      projectNode.firstChild.innerText = titleInput.value;
+    } else {
+      const newProject = Project(titleInput.value);
+      addProjectNode(newProject);
+      projects.push(newProject);
+      setActiveProject(projectList.lastChild);
+    }
     clearForm();
   };
 
   const refresh = () => {
     projectList.innerHTML = '';
-    projects.forEach((project) => addProjectNode(project.getTitle()));
+    projects.forEach((project) => addProjectNode(project));
     setActiveProject(projectList.firstChild);
   };
 
